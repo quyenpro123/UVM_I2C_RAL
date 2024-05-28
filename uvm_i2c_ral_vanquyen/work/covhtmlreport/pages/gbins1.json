@@ -1,0 +1,12 @@
+var g_data = {
+c49:[4,'cov_addr',[],,'48',1,1,'cov','47','work.top_sv_unit::subscriber',[[],[0,'1','202',,'bin0'],[0,'1','121',,'bin1'],[0,'1','1',,'bin2'],[0,'1','49',,'bin4'],[0,'1','24',,'bin5']],[]],
+c50:[4,'cov_paddr_slave_addr',[],,'48',1,1,'cov','47','work.top_sv_unit::subscriber',[[],[0,'1','38',,'bin3']],[]],
+c51:[4,'cov_slave_addr',[],,'48',1,1,'cov','47','work.top_sv_unit::subscriber',[[],[0,'1','24',,'bin7'],[0,'1','13',,'bin8']],[]],
+c52:[5,'cov_write_addr_slave',['cov_paddr_slave_addr','cov_slave_addr'],,'48',1,1,'cov','47','work.top_sv_unit::subscriber',[[],[4,'1','23',,'bin3','bin7'],[4,'1','12',,'bin3','bin8']],[[]]],
+c1009:[4,'cov_addr',[],,'1008',1,1,'cov','1007','/top_sv_unit/subscriber',[[],[0,'1','202',,'bin0'],[0,'1','121',,'bin1'],[0,'1','1',,'bin2'],[0,'1','49',,'bin4'],[0,'1','24',,'bin5']],[]],
+c1010:[4,'cov_paddr_slave_addr',[],,'1008',1,1,'cov','1007','/top_sv_unit/subscriber',[[],[0,'1','38',,'bin3']],[]],
+c1011:[4,'cov_slave_addr',[],,'1008',1,1,'cov','1007','/top_sv_unit/subscriber',[[],[0,'1','24',,'bin7'],[0,'1','13',,'bin8']],[]],
+c1012:[5,'cov_write_addr_slave',['cov_paddr_slave_addr','cov_slave_addr'],,'1008',1,1,'cov','1007','/top_sv_unit/subscriber',[[],[4,'1','23',,'bin3','bin7'],[4,'1','12',,'bin3','bin8']],[[]]],
+dummyEnd:0
+};
+processCovergroupsData(g_data);

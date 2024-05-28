@@ -1,0 +1,13 @@
+-html
+-htmldir
+covhtmlreport
+-details=abcdefgs
+-assert
+-directive
+-cvg
+-code
+bcefs
+-threshL
+50
+-threshH
+90

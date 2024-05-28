@@ -1,0 +1,100 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a>
+<a name="2"><q-n>     2  </q-n></a><q-w>module</q-w> fifo_toplevel_tx	# (	<q-w>parameter</q-w>	DATASIZE	=	8,
+<a name="3"><q-n>     3  </q-n></a>							<q-w>parameter</q-w>	ADDRSIZE	=	4)
+<a name="4"><q-n>     4  </q-n></a>(
+<a name="5"><q-n>     5  </q-n></a>	<q-w>input</q-w>		[DATASIZE - 1 : 0]		wdata_i			, <q-m>// data which write to FIFO buffer</q-m>
+<a name="6"><q-n>     6  </q-n></a>
+<a name="7"><q-n>     7  </q-n></a>	<q-w>input</q-w>								winc_i			, <q-m>// write increase how many cells</q-m>
+<a name="8"><q-n>     8  </q-n></a>	<q-w>input</q-w>								wclk_i			, <q-m>// The clock of write-domain</q-m>
+<a name="9"><q-n>     9  </q-n></a>	<q-w>input</q-w>								wrst_ni			, <q-m>// The negative reset signal of write-domain</q-m>
+<a name="10"><q-n>     10  </q-n></a>
+<a name="11"><q-n>     11  </q-n></a>	<q-w>input</q-w>								rinc_i			, <q-m>// read increase how many cells</q-m>
+<a name="12"><q-n>     12  </q-n></a>	<q-w>input</q-w>								rclk_i			, <q-m>// The clock of read-domain</q-m>
+<a name="13"><q-n>     13  </q-n></a>	<q-w>input</q-w>								rrst_ni			, <q-m>// The negative reset signal of read-domain</q-m>
+<a name="14"><q-n>     14  </q-n></a>
+<a name="15"><q-n>     15  </q-n></a>	<q-w>output</q-w>		[DATASIZE - 1 : 0]		rdata_o			, <q-m>// Data which read from FIFO buffer</q-m>
+<a name="16"><q-n>     16  </q-n></a>	<q-w>output</q-w>								rempty_o		, <q-m>// State of FIFO buffer is empty</q-m>
+<a name="17"><q-n>     17  </q-n></a>	<q-w>output</q-w>								wfull_o			,  <q-m>// State of FIFO buffer is full</q-m>
+<a name="18"><q-n>     18  </q-n></a>	<q-w>output</q-w>								r_almost_empty_o,	<q-m>// almost empty</q-m>
+<a name="19"><q-n>     19  </q-n></a>	<q-w>output</q-w>								w_almost_full_o		<q-m>// almost full</q-m>
+<a name="20"><q-n>     20  </q-n></a>	
+<a name="21"><q-n>     21  </q-n></a>);
+<a name="22"><q-n>     22  </q-n></a>
+<a name="23"><q-n>     23  </q-n></a>	<q-w>wire</q-w>	[ADDRSIZE - 1 : 0]		raddr		; 
+<a name="24"><q-n>     24  </q-n></a>	<q-w>wire</q-w>	[ADDRSIZE - 1 : 0]		waddr		;
+<a name="25"><q-n>     25  </q-n></a>
+<a name="26"><q-n>     26  </q-n></a>	<q-w>wire</q-w>	[ADDRSIZE 	  : 0]		rptr		;
+<a name="27"><q-n>     27  </q-n></a>	<q-w>wire</q-w>	[ADDRSIZE 	  : 0]		rq2_wptr	;
+<a name="28"><q-n>     28  </q-n></a>	<q-w>wire</q-w>	[ADDRSIZE 	  : 0]		wptr		;
+<a name="29"><q-n>     29  </q-n></a>	<q-w>wire</q-w>	[ADDRSIZE 	  : 0]		wq2_rptr	;
+<a name="30"><q-n>     30  </q-n></a>
+<a name="31"><q-n>     31  </q-n></a>
+<a name="32"><q-n>     32  </q-n></a>	fifo_mem_tx	# (DATASIZE, ADDRSIZE)	fifo_mem1
+<a name="33"><q-n>     33  </q-n></a>	(
+<a name="34"><q-n>     34  </q-n></a>		.wdata_i  (wdata_i 	)	, <q-m>// DATA write to FIFO buffer</q-m>
+<a name="35"><q-n>     35  </q-n></a>    	.waddr_i  (waddr	)	, <q-m>// Address of FIFO memory where data written</q-m>
+<a name="36"><q-n>     36  </q-n></a>    	.raddr_i  (raddr	)	, <q-m>// Address of FIFO memory where data read</q-m>
+<a name="37"><q-n>     37  </q-n></a>    	.wclk_i   (wclk_i	)	, <q-m>// Clock of write domain</q-m>
+<a name="38"><q-n>     38  </q-n></a>    	.wclken_i (winc_i	)	, <q-m>// Write clock enable</q-m>
+<a name="39"><q-n>     39  </q-n></a>    	.wfull_i  (wfull_o	)	, <q-m>// Write full , memory full can not write</q-m>
+<a name="40"><q-n>     40  </q-n></a>    	.rdata_o  (rdata_o	)	  <q-m>// DATA read from FIFO buffer  </q-m>
+<a name="41"><q-n>     41  </q-n></a>	);
+<a name="42"><q-n>     42  </q-n></a>
+<a name="43"><q-n>     43  </q-n></a>	rptr_empty	# (ADDRSIZE)	rptr_empty1
+<a name="44"><q-n>     44  </q-n></a>	(
+<a name="45"><q-n>     45  </q-n></a>    	.rq2_wptr_i (rq2_wptr)  , <q-m>// The pointer synchronized from write_pointer to read-domain</q-m>
+<a name="46"><q-n>     46  </q-n></a>    	.rinc_i     (rinc_i	 )	, <q-m>// Read increase how many memory cells</q-m>
+<a name="47"><q-n>     47  </q-n></a>    	.rclk_i     (rclk_i  )	, <q-m>// The clock of read-domain</q-m>
+<a name="48"><q-n>     48  </q-n></a>    	.rrst_ni    (rrst_ni )	, <q-m>// The negative reset signal of read-domain</q-m>
+<a name="49"><q-n>     49  </q-n></a>    	.rempty_o   (rempty_o)	, <q-m>// Output is the buffer is empty, can not read</q-m>
+<a name="50"><q-n>     50  </q-n></a>    	.raddr_o    (raddr   )	, <q-m>// Address used to read data from FIFO memory</q-m>
+<a name="51"><q-n>     51  </q-n></a>    	.rptr_o     (rptr    )	,  <q-m>// The gray-pointer of read-domain used for synchronization to write-domain</q-m>
+<a name="52"><q-n>     52  </q-n></a>		.r_almost_empty_o (r_almost_empty_o)
+<a name="53"><q-n>     53  </q-n></a>	);
+<a name="54"><q-n>     54  </q-n></a>
+<a name="55"><q-n>     55  </q-n></a>	wptr_full	# (ADDRSIZE)	wptr_full1
+<a name="56"><q-n>     56  </q-n></a>	(
+<a name="57"><q-n>     57  </q-n></a>		.wq2_rptr_i	(wq2_rptr)	, <q-m>// The pointer synchronized from read-domain to write-domain</q-m>
+<a name="58"><q-n>     58  </q-n></a>		.winc_i		(winc_i	 )	, <q-m>// Write increase how many cells</q-m>
+<a name="59"><q-n>     59  </q-n></a>		.wclk_i		(wclk_i	 )	, <q-m>// The clock of write-domain</q-m>
+<a name="60"><q-n>     60  </q-n></a>		.wrst_ni	(wrst_ni )	, <q-m>// The negative reset signal of write-domain</q-m>
+<a name="61"><q-n>     61  </q-n></a>		.wfull_o	(wfull_o )	, <q-m>// Output is the buffer is full, can not write</q-m>
+<a name="62"><q-n>     62  </q-n></a>		.wptr_o		(wptr	 )	, <q-m>// The gray-pointer of write-domain used for synchronization to read-domain</q-m>
+<a name="63"><q-n>     63  </q-n></a>		.waddr_o	(waddr	 ) 	, <q-m>// The address used write data to FIFO memory</q-m>
+<a name="64"><q-n>     64  </q-n></a>		.w_almost_full_o (w_almost_full_o)
+<a name="65"><q-n>     65  </q-n></a>	);
+<a name="66"><q-n>     66  </q-n></a>
+<a name="67"><q-n>     67  </q-n></a>	sync_r2w	# (ADDRSIZE)	sync_r2w1
+<a name="68"><q-n>     68  </q-n></a>	(
+<a name="69"><q-n>     69  </q-n></a>	    .rptr_i     (rptr	 )	, <q-m>// read pointer passed to write-domain</q-m>
+<a name="70"><q-n>     70  </q-n></a>    	.wclk_i     (wclk_i	 )	, <q-m>// Clock of write-domain</q-m>
+<a name="71"><q-n>     71  </q-n></a>    	.wrst_ni    (wrst_ni )  , <q-m>// Negative reset signal of write-domain</q-m>
+<a name="72"><q-n>     72  </q-n></a>    	.wq2_rptr_o (wq2_rptr) 	  <q-m>// The pointer synchronized from read-domain to write-domain</q-m>
+<a name="73"><q-n>     73  </q-n></a>	);	
+<a name="74"><q-n>     74  </q-n></a>
+<a name="75"><q-n>     75  </q-n></a>	sync_w2r	# (ADDRSIZE)	sync_w2r1
+<a name="76"><q-n>     76  </q-n></a>	(
+<a name="77"><q-n>     77  </q-n></a>	    .wptr_i     (wptr	 )	, <q-m>// The write pointer passed to read-domain</q-m>
+<a name="78"><q-n>     78  </q-n></a>    	.rclk_i     (rclk_i	 )	, <q-m>// The clock of read-domain</q-m>
+<a name="79"><q-n>     79  </q-n></a>    	.rrst_ni    (rrst_ni )	, <q-m>// The negative reset of read-domain</q-m>
+<a name="80"><q-n>     80  </q-n></a>    	.rq2_wptr_o (rq2_wptr)    <q-m>// The pointer synchronized from write-domain to read-domain</q-m>
+<a name="81"><q-n>     81  </q-n></a>	);
+<a name="82"><q-n>     82  </q-n></a>
+<a name="83"><q-n>     83  </q-n></a><q-w>endmodule</q-w>
+<a name="84"><q-n>     84  </q-n></a>
+</pre>
+</tt>
+
+  
+</body>
+</html>

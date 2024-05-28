@@ -1,0 +1,88 @@
+var g_data = {
+f59:{
+scopes:[{link:'z.htm?f=0&s=59',val:'work.i2c_master_fsm'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg182',items:[{c:'G',p:'100.00',z:'currrent_state'}
+,{cr:'c',s:'1',z:'IDLE',h:'137',c:'g'}
+,{cr:'c',z:'IDLE -&gt; START',h:'37',c:'g'}
+,{cr:'c',s:'1',z:'START',h:'92',c:'g'}
+,{cr:'c',z:'START -&gt; ADDRESS',h:'45',c:'g'}
+,{cr:'c',z:'START -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'ADDRESS',h:'90',c:'g'}
+,{cr:'c',z:'ADDRESS -&gt; READ_ACK',h:'44',c:'g'}
+,{cr:'c',z:'ADDRESS -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'READ_ACK',h:'88',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; WRITE_DATA',h:'20',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; READ_DATA',h:'20',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; STOP',h:'3',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'WRITE_DATA',h:'322',c:'g'}
+,{cr:'c',z:'WRITE_DATA -&gt; READ_LATER_ACK',h:'160',c:'g'}
+,{cr:'c',z:'WRITE_DATA -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'READ_DATA',h:'280',c:'g'}
+,{cr:'c',z:'READ_DATA -&gt; WRITE_ACK',h:'138',c:'g'}
+,{cr:'c',z:'READ_DATA -&gt; IDLE',h:'2',c:'g'}
+,{cr:'c',s:'1',z:'STOP',h:'54',c:'g'}
+,{cr:'c',z:'STOP -&gt; IDLE',h:'27',c:'g'}
+,{cr:'c',s:'1',z:'READ_LATER_ACK',h:'320',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; WRITE_DATA',h:'141',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; REPEAT_START',h:'1',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; STOP',h:'16',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; IDLE',h:'2',c:'g'}
+,{cr:'c',s:'1',z:'REPEAT_START',h:'20',c:'g'}
+,{cr:'c',z:'REPEAT_START -&gt; START',h:'9',c:'g'}
+,{cr:'c',z:'REPEAT_START -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'WRITE_ACK',h:'276',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; STOP',h:'8',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; READ_DATA',h:'120',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; REPEAT_START',h:'9',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; IDLE',h:'1',c:'g'}
+]}
+
+],
+},
+f99:{
+scopes:[{s:'87',b:'1',val:'top'},{s:'89',b:'1',val:'dut'},{link:'z.htm?f=0&s=99',val:'i2c_master_fsm'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg182',items:[{c:'G',p:'100.00',z:'currrent_state'}
+,{cr:'c',s:'1',z:'IDLE',h:'137',c:'g'}
+,{cr:'c',z:'IDLE -&gt; START',h:'37',c:'g'}
+,{cr:'c',s:'1',z:'START',h:'92',c:'g'}
+,{cr:'c',z:'START -&gt; ADDRESS',h:'45',c:'g'}
+,{cr:'c',z:'START -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'ADDRESS',h:'90',c:'g'}
+,{cr:'c',z:'ADDRESS -&gt; READ_ACK',h:'44',c:'g'}
+,{cr:'c',z:'ADDRESS -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'READ_ACK',h:'88',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; WRITE_DATA',h:'20',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; READ_DATA',h:'20',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; STOP',h:'3',c:'g'}
+,{cr:'c',z:'READ_ACK -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'WRITE_DATA',h:'322',c:'g'}
+,{cr:'c',z:'WRITE_DATA -&gt; READ_LATER_ACK',h:'160',c:'g'}
+,{cr:'c',z:'WRITE_DATA -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'READ_DATA',h:'280',c:'g'}
+,{cr:'c',z:'READ_DATA -&gt; WRITE_ACK',h:'138',c:'g'}
+,{cr:'c',z:'READ_DATA -&gt; IDLE',h:'2',c:'g'}
+,{cr:'c',s:'1',z:'STOP',h:'54',c:'g'}
+,{cr:'c',z:'STOP -&gt; IDLE',h:'27',c:'g'}
+,{cr:'c',s:'1',z:'READ_LATER_ACK',h:'320',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; WRITE_DATA',h:'141',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; REPEAT_START',h:'1',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; STOP',h:'16',c:'g'}
+,{cr:'c',z:'READ_LATER_ACK -&gt; IDLE',h:'2',c:'g'}
+,{cr:'c',s:'1',z:'REPEAT_START',h:'20',c:'g'}
+,{cr:'c',z:'REPEAT_START -&gt; START',h:'9',c:'g'}
+,{cr:'c',z:'REPEAT_START -&gt; IDLE',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'WRITE_ACK',h:'276',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; STOP',h:'8',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; READ_DATA',h:'120',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; REPEAT_START',h:'9',c:'g'}
+,{cr:'c',z:'WRITE_ACK -&gt; IDLE',h:'1',c:'g'}
+]}
+
+],
+},
+dummyEnd:0
+};
+processFsmData(g_data);

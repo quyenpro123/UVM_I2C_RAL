@@ -1,0 +1,55 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a><q-w>module</q-w> fifo_mem_tx # ( <q-w>parameter</q-w> DATASIZE = 8    , <q-m>// Memory data width</q-m>
+<a name="2"><q-n>     2  </q-n></a>                    <q-w>parameter</q-w> ADDRSIZE = 4    ) <q-m>// Address width</q-m>
+<a name="3"><q-n>     3  </q-n></a>(    
+<a name="4"><q-n>     4  </q-n></a>    <q-w>input</q-w>	       [DATASIZE - 1 : 0]   wdata_i     , <q-m>// DATA write to FIFO buffer</q-m>
+<a name="5"><q-n>     5  </q-n></a>    <q-w>input</q-w>	       [ADDRSIZE - 1 : 0]   waddr_i     , <q-m>// Address of FIFO memory where data written</q-m>
+<a name="6"><q-n>     6  </q-n></a>    <q-w>input</q-w>	       [ADDRSIZE - 1 : 0]   raddr_i     , <q-m>// Address of FIFO memory where data read</q-m>
+<a name="7"><q-n>     7  </q-n></a>    <q-w>input</q-w>	                            wclk_i      , <q-m>// Clock of write domain</q-m>
+<a name="8"><q-n>     8  </q-n></a>    <q-m>//input                               rst_ni      , // Reset signal is active LOW</q-m>
+<a name="9"><q-n>     9  </q-n></a>    <q-w>input</q-w>	                            wclken_i    , <q-m>// Write clock enable</q-m>
+<a name="10"><q-n>     10  </q-n></a>    <q-w>input</q-w>	                            wfull_i     , <q-m>// Write full , memory full can not write</q-m>
+<a name="11"><q-n>     11  </q-n></a>    <q-w>output</q-w>	      [DATASIZE - 1 : 0]    rdata_o       <q-m>// DATA read from FIFO buffer   </q-m>
+<a name="12"><q-n>     12  </q-n></a>);
+<a name="13"><q-n>     13  </q-n></a>
+<a name="14"><q-n>     14  </q-n></a>    localparam  DEPTH   =   1 &lt;&lt; ADDRSIZE                     ; <q-m>// Size of buffer</q-m>
+<a name="15"><q-n>     15  </q-n></a>
+<a name="16"><q-n>     16  </q-n></a>    <q-w>reg</q-w>     [DATASIZE - 1 : 0]      mem  [0 : DEPTH - 1]     ;  <q-m>// Array with DEPTH  element</q-m>
+<a name="17"><q-n>     17  </q-n></a>    <q-w>reg</q-w>     [DATASIZE - 1 : 0]      rdata                    ;
+<a name="18"><q-n>     18  </q-n></a>
+<a name="19"><q-n>     19  </q-n></a>    <q-w>assign</q-w>      rdata_o     =       rdata                    ;
+<a name="20"><q-n>     20  </q-n></a>    
+<a name="21"><q-n>     21  </q-n></a>    <q-m>// Read data from FIFO buffer</q-m>
+<a name="22"><q-n>     22  </q-n></a>	<q-w>always</q-w>	@ (*)
+<a name="23"><q-n>     23  </q-n></a>	<q-w>begin</q-w>
+<a name="24"><q-n>     24  </q-n></a>
+<a name="25"><q-n>     25  </q-n></a>		rdata      =    mem[raddr_i]     ;
+<a name="26"><q-n>     26  </q-n></a>
+<a name="27"><q-n>     27  </q-n></a>	<q-w>end</q-w>
+<a name="28"><q-n>     28  </q-n></a>    
+<a name="29"><q-n>     29  </q-n></a>    <q-m>//Write data to FIFO buffer</q-m>
+<a name="30"><q-n>     30  </q-n></a>    <q-w>always</q-w> @ (<q-a>posedge</q-w> wclk_i )
+<a name="31"><q-n>     31  </q-n></a>    <q-w>begin</q-w>
+<a name="32"><q-n>     32  </q-n></a>        
+<a name="33"><q-n>     33  </q-n></a>            <q-w>if</q-w> (wclken_i &amp;&amp; !wfull_i)
+<a name="34"><q-n>     34  </q-n></a>                mem[waddr_i]    &lt;=   wdata_i     ; 
+<a name="35"><q-n>     35  </q-n></a>
+<a name="36"><q-n>     36  </q-n></a>    <q-w>end</q-w>
+<a name="37"><q-n>     37  </q-n></a>    
+<a name="38"><q-n>     38  </q-n></a><q-w>endmodule</q-w>
+<a name="39"><q-n>     39  </q-n></a>
+</pre>
+</tt>
+
+  
+</body>
+</html>

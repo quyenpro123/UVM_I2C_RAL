@@ -1,0 +1,94 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a>`ifndef SCB
+<a name="2"><q-n>     2  </q-n></a>`<q-a>define</q-w> SCB
+<a name="3"><q-n>     3  </q-n></a><q-w>class</q-w> scoreboard <q-w>extends</q-w> uvm_component;
+<a name="4"><q-n>     4  </q-n></a>  `uvm_component_utils(scoreboard)
+<a name="5"><q-n>     5  </q-n></a>  <q-w>logic</q-w> check_data;
+<a name="6"><q-n>     6  </q-n></a>  i2c_reg_block reg_model;
+<a name="7"><q-n>     7  </q-n></a>  <q-w>logic</q-w> [7:0] data_slv;
+<a name="8"><q-n>     8  </q-n></a>  <q-w>logic</q-w> [7:0] data_mas;
+<a name="9"><q-n>     9  </q-n></a>  <q-w>logic</q-w> [7:0] data_slave_read[$];
+<a name="10"><q-n>     10  </q-n></a>  <q-w>logic</q-w> [7:0] data_apb_master_send[$];
+<a name="11"><q-n>     11  </q-n></a>
+<a name="12"><q-n>     12  </q-n></a>  uvm_reg_data_t mirror_data;
+<a name="13"><q-n>     13  </q-n></a>  uvm_analysis_imp #(packet, scoreboard) scoreboard_port;
+<a name="14"><q-n>     14  </q-n></a>  <q-w>int</q-w> i;
+<a name="15"><q-n>     15  </q-n></a>  <q-w>function</q-w> <q-w>new</q-w>(<q-w>string</q-w> name = <q-l>"scoreboard"</q-l>, uvm_component parent = <q-w>null</q-w>);
+<a name="16"><q-n>     16  </q-n></a>    <q-w>super</q-w>.<q-w>new</q-w>(name, parent);
+<a name="17"><q-n>     17  </q-n></a>  <q-w>endfunction</q-w>: <q-w>new</q-w>
+<a name="18"><q-n>     18  </q-n></a>
+<a name="19"><q-n>     19  </q-n></a>  <q-w>function</q-w> <q-w>void</q-w> build_phase(uvm_phase phase);
+<a name="20"><q-n>     20  </q-n></a>    <q-w>super</q-w>.build_phase(phase);
+<a name="21"><q-n>     21  </q-n></a>    `uvm_info(<q-l>"SCB_CLASS"</q-l>, <q-l>"Build Phase!"</q-l>, UVM_MEDIUM)
+<a name="22"><q-n>     22  </q-n></a>   
+<a name="23"><q-n>     23  </q-n></a>    scoreboard_port = <q-w>new</q-w>(<q-l>"scoreboard_port"</q-l>, <q-w>this</q-w>);
+<a name="24"><q-n>     24  </q-n></a>  <q-w>endfunction</q-w>: build_phase
+<a name="25"><q-n>     25  </q-n></a>  
+<a name="26"><q-n>     26  </q-n></a>  <q-m>//compare data i2c master sent to data i2c slave received</q-m>
+<a name="27"><q-n>     27  </q-n></a>  <q-w>virtual</q-w> <q-w>function</q-w> <q-w>void</q-w> extract_phase(uvm_phase phase);
+<a name="28"><q-n>     28  </q-n></a>    <q-w>super</q-w>.extract_phase(phase);
+<a name="29"><q-n>     29  </q-n></a>    <q-m>// `uvm_info("SCOREBOARD_CLASS", $sformatf("data size APB: %d", data_apb_master_send.size()), UVM_LOW)</q-m>
+<a name="30"><q-n>     30  </q-n></a>    <q-m>// `uvm_info("SCOREBOARD_CLASS", $sformatf("data size slave: %d", data_slave_read.size()), UVM_LOW)</q-m>
+<a name="31"><q-n>     31  </q-n></a>    <q-m>//if ((data_apb_master_send.size() == data_slave_read.size()) &amp;&amp; data_slave_read.size() != 0)</q-m>
+<a name="32"><q-n>     32  </q-n></a>    <q-m>// foreach(data_apb_master_send[j]) begin</q-m>
+<a name="33"><q-n>     33  </q-n></a>    <q-m>//   if (data_apb_master_send[j] == 0)</q-m>
+<a name="34"><q-n>     34  </q-n></a>    <q-m>//     data_apb_master_send.delete(j);</q-m>
+<a name="35"><q-n>     35  </q-n></a>    <q-m>// end</q-m>
+<a name="36"><q-n>     36  </q-n></a>    <q-w>if</q-w> ((data_apb_master_send.size() == data_slave_read.size()) &amp;&amp; data_slave_read.size() != 0)
+<a name="37"><q-n>     37  </q-n></a>    <q-w>begin</q-w>
+<a name="38"><q-n>     38  </q-n></a>      <q-w>foreach</q-w> (data_apb_master_send[j]) <q-w>begin</q-w>
+<a name="39"><q-n>     39  </q-n></a>        <q-w>assert</q-w> (data_apb_master_send[j] == data_slave_read[j]) $display(<q-l>"SCOREBOARD_CLASS ASSERTION, Slave received successfully data %0h"</q-l>, data_apb_master_send[j]); <q-w>else</q-w>  
+<a name="40"><q-n>     40  </q-n></a>          $<q-v>error</q-w>(<q-l>"%d SCOREBOARD_CLASS ASSERTION, Slave received unsuccessfully data %0h, actual data %0h"</q-l>, $<q-w>time</q-w>, data_apb_master_send[j], data_slave_read[j]);
+<a name="41"><q-n>     41  </q-n></a>      <q-w>end</q-w>
+<a name="42"><q-n>     42  </q-n></a>    <q-w>end</q-w>
+<a name="43"><q-n>     43  </q-n></a>
+<a name="44"><q-n>     44  </q-n></a>    <q-w>foreach</q-w>(data_apb_master_send[j]) <q-w>begin</q-w>
+<a name="45"><q-n>     45  </q-n></a>      `uvm_info(<q-l>"SCOREBOARD_CLASS"</q-l>, $sformatf(<q-l>"data APB: %h"</q-l>, data_apb_master_send[j]), UVM_LOW)
+<a name="46"><q-n>     46  </q-n></a>    <q-w>end</q-w>
+<a name="47"><q-n>     47  </q-n></a>
+<a name="48"><q-n>     48  </q-n></a>    <q-w>foreach</q-w>(data_slave_read[j]) <q-w>begin</q-w>
+<a name="49"><q-n>     49  </q-n></a>      `uvm_info(<q-l>"SCOREBOARD_CLASS"</q-l>, $sformatf(<q-l>"data SLAVE: %h"</q-l>, data_slave_read[j]), UVM_LOW)
+<a name="50"><q-n>     50  </q-n></a>    <q-w>end</q-w>
+<a name="51"><q-n>     51  </q-n></a>
+<a name="52"><q-n>     52  </q-n></a>    data_apb_master_send.delete();
+<a name="53"><q-n>     53  </q-n></a>    data_slave_read.delete();
+<a name="54"><q-n>     54  </q-n></a>  <q-w>endfunction</q-w>
+<a name="55"><q-n>     55  </q-n></a>
+<a name="56"><q-n>     56  </q-n></a>  <q-w>function</q-w> <q-w>void</q-w> write(packet item);
+<a name="57"><q-n>     57  </q-n></a>    <q-w>if</q-w> (item.paddr == 0 &amp;&amp; item.pwrite == 1 &amp;&amp; item.pdata != 0)
+<a name="58"><q-n>     58  </q-n></a>      data_apb_master_send.push_back(item.pdata);
+<a name="59"><q-n>     59  </q-n></a>
+<a name="60"><q-n>     60  </q-n></a>    <q-m>//check mirror data and data APB read from DUT's register block</q-m>
+<a name="61"><q-n>     61  </q-n></a>    <q-w>if</q-w> (!item.pwrite)
+<a name="62"><q-n>     62  </q-n></a>    <q-w>begin</q-w>
+<a name="63"><q-n>     63  </q-n></a>      <q-w>case</q-w> (item.paddr)
+<a name="64"><q-n>     64  </q-n></a>        0: mirror_data = <q-w>this</q-w>.reg_model.reg_tran.get_mirrored_value();
+<a name="65"><q-n>     65  </q-n></a>        1: mirror_data = <q-w>this</q-w>.reg_model.reg_rev.get_mirrored_value();
+<a name="66"><q-n>     66  </q-n></a>        2: mirror_data = <q-w>this</q-w>.reg_model.reg_st.get_mirrored_value();
+<a name="67"><q-n>     67  </q-n></a>        3: mirror_data = <q-w>this</q-w>.reg_model.reg_addr.get_mirrored_value();
+<a name="68"><q-n>     68  </q-n></a>        4: mirror_data = <q-w>this</q-w>.reg_model.reg_cmd.get_mirrored_value();
+<a name="69"><q-n>     69  </q-n></a>        5: mirror_data = <q-w>this</q-w>.reg_model.reg_pres.get_mirrored_value();
+<a name="70"><q-n>     70  </q-n></a>      <q-w>endcase</q-w>
+<a name="71"><q-n>     71  </q-n></a>      <q-w>if</q-w> (mirror_data == item.pdata)
+<a name="72"><q-n>     72  </q-n></a>        `uvm_info(<q-l>"SCOREBOARD CLASS"</q-l>, $sformatf(<q-l>"reg %0h MATCH VALUE"</q-l>, item.paddr), UVM_LOW)
+<a name="73"><q-n>     73  </q-n></a>      <q-w>else</q-w>
+<a name="74"><q-n>     74  </q-n></a>        $<q-v>error</q-w>(<q-l>"[SCOREBOARD CLASS] reg %0h MISMATCH VALUE - EXPECT VALUE: %0h, ACTUAL VALUE: %0h"</q-l>, item.paddr, mirror_data, item.pdata);
+<a name="75"><q-n>     75  </q-n></a>    <q-w>end</q-w>
+<a name="76"><q-n>     76  </q-n></a>    <q-m>// `uvm_info("SCB_CLASS", $sformatf("Inside write function! addr %0h", item.paddr), UVM_MEDIUM)</q-m>
+<a name="77"><q-n>     77  </q-n></a>  <q-w>endfunction</q-w>
+<a name="78"><q-n>     78  </q-n></a><q-w>endclass</q-w>: scoreboard
+<a name="79"><q-n>     79  </q-n></a>`<q-a>endif</q-w></pre>
+</tt>
+
+  
+</body>
+</html>

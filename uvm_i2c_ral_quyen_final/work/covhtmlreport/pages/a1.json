@@ -1,0 +1,24 @@
+var g_data = {
+a37:{
+scopes:[{s:'13',b:'0',val:'work.top_sv_unit'},{val:'reg_adapter'},{link:'z.htm?f=0&s=37',val:'bus2reg'}]
+,assertions:[{dummy:0},{cr:'c',c:'g',lnk:'__HDL_srcfile_1.htm#22',z:'immed__22',fc:'Gr',pc:'Gr',h0:'0',h1:'870'}
+],
+},
+a45:{
+scopes:[{s:'13',b:'1',val:'work.top_sv_unit'},{val:'scoreboard'},{val:'extract_phase'},{val:'#anonblk#182313828#38#2#'},{link:'z.htm?f=0&s=45',val:'#ublk#182313828#38'}]
+,assertions:[{dummy:0},{cr:'c',c:'g',lnk:'__HDL_srcfile_2.htm#39',z:'immed__39',fc:'Gr',pc:'Gr',h0:'0',h1:'94'}
+],
+},
+a997:{
+scopes:[{s:'973',b:'0',val:'top_sv_unit'},{val:'reg_adapter'},{link:'z.htm?f=0&s=997',val:'bus2reg'}]
+,assertions:[{dummy:0},{cr:'c',c:'g',lnk:'__HDL_srcfile_1.htm#22',z:'immed__22',fc:'Gr',pc:'Gr',h0:'0',h1:'870'}
+],
+},
+a1005:{
+scopes:[{s:'973',b:'1',val:'top_sv_unit'},{val:'scoreboard'},{val:'extract_phase'},{val:'#anonblk#182313828#38#2#'},{link:'z.htm?f=0&s=1005',val:'#ublk#182313828#38'}]
+,assertions:[{dummy:0},{cr:'c',c:'g',lnk:'__HDL_srcfile_2.htm#39',z:'immed__39',fc:'Gr',pc:'Gr',h0:'0',h1:'94'}
+],
+},
+dummyEnd:0
+};
+processAssertionsData(g_data,1);

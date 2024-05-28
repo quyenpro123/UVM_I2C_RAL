@@ -1,0 +1,511 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/PC/Desktop/git_code/verilog_project/UVM_I2C_RAL/uvm_i2c_ral_quyen_final/work
+T_opt
+!s110 1716893429
+VgEIi1a=cDcFenNz0oNTzo3
+04 3 4 work top fast 0
+=1-d85ed39514bd-6655b6f5-1f8-1284
+o-quiet -auto_acc_if_foreign -work work +acc
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.7c;67
+vapb_slave_interface
+Z2 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z3 !s110 1716893428
+!i10b 1
+!s100 kjm;52R1SeQFaM5Zm^BWI1
+IcQ5J=Lk9Yg]L0C@Ua`Of82
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+!s105 apb_slave_interface_v_unit
+S1
+R0
+Z5 w1716796395
+8../rtl/apb_slave_interface.v
+F../rtl/apb_slave_interface.v
+L0 1
+Z6 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z7 !s108 1716893428.000000
+Z8 !s107 ../rtl/i2c_top.v|
+Z9 !s90 -sv|+acc|-incr|-f|filelist_rtl.f|-l|vlog_rtl.log|+cover=sbceft|-assertdebug|
+!i113 0
+Z10 !s102 +cover=sbceft
+Z11 o-sv +acc +libext+.svh+.vh+.v+.sv +cover=sbceft -assertdebug -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z12 !s92 -sv +acc +libext+.svh+.vh+.v+.sv +incdir+../rtl -y ../rtl +cover=sbceft -assertdebug -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vclock_generator
+R2
+R3
+!i10b 1
+!s100 aBhXzg?BH_YWPB72NAZj>3
+IEfD<k[zEOzHNcHL?Uo5`70
+R4
+!s105 clock_generator_v_unit
+S1
+R0
+R5
+8../rtl/clock_generator.v
+F../rtl/clock_generator.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vdata_fifo_mem
+R2
+R3
+!i10b 1
+!s100 TnFk@QEe@XQ;6lT3EzSWi2
+IU[e`_7``]G:_nf:Qb]IE60
+R4
+!s105 data_fifo_mem_v_unit
+S1
+R0
+R5
+8../rtl/data_fifo_mem.v
+F../rtl/data_fifo_mem.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vdata_path_i2c_to_core
+R2
+R3
+!i10b 1
+!s100 NFPG4QbWJhb<=FahLGY<72
+IDkPlKMCK?kCKa3nCLf2[A2
+R4
+!s105 data_path_i2c_to_core_v_unit
+S1
+R0
+R5
+8../rtl/data_path_i2c_to_core.v
+F../rtl/data_path_i2c_to_core.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vfifo_mem_rx
+R2
+R3
+!i10b 1
+!s100 P62[gCDh@7em4d7G7adZh3
+IVOiM`ON0i10F4I0chF]Y:0
+R4
+!s105 fifo_mem_rx_v_unit
+S1
+R0
+R5
+8../rtl/fifo_mem_rx.v
+F../rtl/fifo_mem_rx.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vfifo_mem_tx
+R2
+R3
+!i10b 1
+!s100 ;eW;mIfHNJX9]3cYd=WL13
+IS7n4nimH^T1G2P]@?fIh<1
+R4
+!s105 fifo_mem_tx_v_unit
+S1
+R0
+R5
+8../rtl/fifo_mem_tx.v
+F../rtl/fifo_mem_tx.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vfifo_toplevel_rx
+R2
+R3
+!i10b 1
+!s100 S9LMG]Y`aK;X`QXdT?jn:2
+I:Q>:zCe[1P9fmTk_laPQ<1
+R4
+!s105 fifo_toplevel_rx_v_unit
+S1
+R0
+R5
+8../rtl/fifo_toplevel_rx.v
+F../rtl/fifo_toplevel_rx.v
+L0 2
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vfifo_toplevel_tx
+R2
+R3
+!i10b 1
+!s100 n[301lW@]WNRG?:_<E^RC0
+I@[KOD4Yezm:[k4kSGPEYK3
+R4
+!s105 fifo_toplevel_tx_v_unit
+S1
+R0
+R5
+8../rtl/fifo_toplevel_tx.v
+F../rtl/fifo_toplevel_tx.v
+L0 2
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vi2c_master_fsm
+R2
+R3
+!i10b 1
+!s100 h=^5]5h61YoCBTfcT>KI71
+Il@RF9bBI2?<Q09>RSI:@Q0
+R4
+!s105 i2c_master_fsm_v_unit
+S1
+R0
+R5
+8../rtl/i2c_master_fsm.v
+F../rtl/i2c_master_fsm.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vi2c_slave_model
+R2
+R3
+!i10b 1
+!s100 UK>6K:hLjj8U]eB<mE]h43
+IQ@2QBf^_[a_f20JRHMaKi0
+R4
+!s105 i2c_slave_model_v_unit
+S1
+R0
+R5
+8../sim/i2c_slave_model.v
+F../sim/i2c_slave_model.v
+L0 69
+R6
+r1
+!s85 0
+31
+Z13 !s108 1716893427.000000
+Z14 !s107 ../sim/test_case.sv|../sim/subscriber.sv|../sim/env.sv|../sim/scoreboard.sv|../sim/agent.sv|../sim/monitor.sv|../sim/driver.sv|../sim/reg_adapter.sv|../sim/sequencer.sv|../sim/reg_model.sv|../sim/reg_sequence.sv|../sim/sequence_item.sv|../sim/interface.sv|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|../sim/top.sv|
+Z15 !s90 -timescale=1ns/1ns|-sv|+acc|-incr|-f|filelist_tb.f|-assertdebug|+define+SEQ=TEST_11|+define+NUM=3|-l|vlog_tb.log|
+!i113 0
+Z16 o-timescale=1ns/1ns -sv +acc +libext+.svh+.vh+.v+.sv -assertdebug -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z17 !s92 -timescale=1ns/1ns -sv +acc +libext+.svh+.vh+.v+.sv +incdir+../sim -y ../sim -assertdebug +define+SEQ=TEST_11 +define+NUM=3 -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vi2c_top
+R2
+R3
+!i10b 1
+!s100 PgZ_XJU0LX>Bhz^UBjz@z0
+IR[71m@h`DRNeDN<XzYWIe3
+R4
+!s105 i2c_top_v_unit
+S1
+R0
+R5
+8../rtl/i2c_top.v
+F../rtl/i2c_top.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+Yintf
+R2
+Z18 DXx6 mtiUvm 7 uvm_pkg 0 22 3zPkj@YUcM=M^m3zCLh<H1
+Z19 DXx4 work 11 top_sv_unit 0 22 L=OFZTO>kk<ab8lk3I_7Z3
+R4
+r1
+!s85 0
+!i10b 1
+!s100 GRmdT=_9H1e]U7>OFgQPJ1
+IGQ@@D>`De?ZC6OD?Oa90k0
+Z20 !s105 top_sv_unit
+S1
+R0
+R5
+8../sim/interface.sv
+Z21 F../sim/interface.sv
+L0 3
+R6
+31
+R13
+R14
+R15
+!i113 0
+R16
+R17
+R1
+vrptr_empty
+R2
+R3
+!i10b 1
+!s100 Wo6S=ZI8T?RLiP6z`X9]V0
+IFh@f2KkgFo;cAg?^_1Ukj1
+R4
+!s105 rptr_empty_v_unit
+S1
+R0
+R5
+8../rtl/rptr_empty.v
+F../rtl/rptr_empty.v
+L0 5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vsync_r2w
+R2
+R3
+!i10b 1
+!s100 >T<YI_DX@K^=`k@bWf:Nh0
+I:E83^G3:bW3g5o;@km_Z70
+R4
+!s105 sync_r2w_v_unit
+S1
+R0
+R5
+8../rtl/sync_r2w.v
+F../rtl/sync_r2w.v
+L0 5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vsync_w2r
+R2
+R3
+!i10b 1
+!s100 >:h9lHnO>nKmE86zMhEo>3
+IM4zT^8^BKKTPFS?RIg5RE1
+R4
+!s105 sync_w2r_v_unit
+S1
+R0
+R5
+8../rtl/sync_w2r.v
+F../rtl/sync_w2r.v
+L0 5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1
+vtop
+R2
+R18
+R19
+R4
+r1
+!s85 0
+!i10b 1
+!s100 YabaY>dRE>F@6QVzBDDm`2
+IPb4I?E9Z5Ml31_ncVH[3g0
+R20
+S1
+R0
+R5
+Z22 8../sim/top.sv
+Z23 F../sim/top.sv
+L0 27
+R6
+31
+R13
+R14
+R15
+!i113 0
+R16
+R17
+R1
+Xtop_sv_unit
+!s115 intf
+R2
+R18
+VL=OFZTO>kk<ab8lk3I_7Z3
+r1
+!s85 0
+!i10b 1
+!s100 _i9f[LM97nDD0lVdGZ]?K3
+IL=OFZTO>kk<ab8lk3I_7Z3
+!i103 1
+S1
+R0
+w1716806187
+R22
+R23
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh
+R21
+F../sim/sequence_item.sv
+F../sim/reg_sequence.sv
+F../sim/reg_model.sv
+F../sim/sequencer.sv
+F../sim/reg_adapter.sv
+F../sim/driver.sv
+F../sim/monitor.sv
+F../sim/agent.sv
+F../sim/scoreboard.sv
+F../sim/env.sv
+F../sim/subscriber.sv
+F../sim/test_case.sv
+L0 6
+R6
+31
+R13
+R14
+R15
+!i113 0
+R16
+R17
+R1
+vwptr_full
+R2
+R3
+!i10b 1
+!s100 XS1TIJA`;X0jI_W3ER_fO1
+ITb<e9;0CI6k5[97`CR4fJ0
+R4
+!s105 wptr_full_v_unit
+S1
+R0
+R5
+8../rtl/wptr_full.v
+F../rtl/wptr_full.v
+L0 6
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R11
+R12
+R1

@@ -1,5 +1,5 @@
 QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
-Start time: 17:50:28 on May 28,2024
+Start time: 11:10:25 on May 30,2024
 vlog -sv "+acc" -incr -f filelist_rtl.f -l vlog_rtl.log "+cover=sbceft" -assertdebug 
 -- Compiling module i2c_top
 -- Scanning library directory '../rtl'
@@ -19,5 +19,5 @@ vlog -sv "+acc" -incr -f filelist_rtl.f -l vlog_rtl.log "+cover=sbceft" -assertd
 
 Top level modules:
 	i2c_top
-End time: 17:50:28 on May 28,2024, Elapsed time: 0:00:00
+End time: 11:10:25 on May 30,2024, Elapsed time: 0:00:00
 Errors: 0, Warnings: 0

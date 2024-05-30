@@ -144,429 +144,453 @@
 <a name="134"><q-n>     134  </q-n></a>
 <a name="135"><q-n>     135  </q-n></a>            READ_ACK    :   <q-w>begin</q-w>
 <a name="136"><q-n>     136  </q-n></a>
-<a name="137"><q-n>     137  </q-n></a>				<q-m>// When have an ACK or NACK, wait for scl is negedge and then to next state</q-m>
-<a name="138"><q-n>     138  </q-n></a>                <q-w>if</q-w> ((scl_negative == 1) &amp;&amp; (read_ack_to_read_done == 0 &amp;&amp; read_ack_to_write_done == 0)) <q-w>begin</q-w>
+<a name="137"><q-n>     137  </q-n></a>				<q-m>// // When have an ACK or NACK, wait for scl is negedge and then to next state</q-m>
+<a name="138"><q-n>     138  </q-n></a>                <q-m>// if ((scl_negative == 1) &amp;&amp; (read_ack_to_read_done == 0 &amp;&amp; read_ack_to_write_done == 0)) begin</q-m>
 <a name="139"><q-n>     139  </q-n></a>
-<a name="140"><q-n>     140  </q-n></a>                    next_sate   =   STOP    ;
+<a name="140"><q-n>     140  </q-n></a>                <q-m>//     next_sate   =   STOP    ;</q-m>
 <a name="141"><q-n>     141  </q-n></a>
-<a name="142"><q-n>     142  </q-n></a>                <q-w>end</q-w>
+<a name="142"><q-n>     142  </q-n></a>                <q-m>// end</q-m>
 <a name="143"><q-n>     143  </q-n></a>
-<a name="144"><q-n>     144  </q-n></a>				<q-w>else</q-w> <q-w>if</q-w> ((scl_negative == 1) &amp;&amp; (read_ack_to_read_done == 1)) <q-w>begin</q-w>
+<a name="144"><q-n>     144  </q-n></a>				<q-m>// else if ((scl_negative == 1) &amp;&amp; (read_ack_to_read_done == 1)) begin</q-m>
 <a name="145"><q-n>     145  </q-n></a>
-<a name="146"><q-n>     146  </q-n></a>					next_sate       		=   READ_DATA	;
+<a name="146"><q-n>     146  </q-n></a>				<q-m>// 	next_sate       		=   READ_DATA	;</q-m>
 <a name="147"><q-n>     147  </q-n></a>
-<a name="148"><q-n>     148  </q-n></a>				<q-w>end</q-w>
+<a name="148"><q-n>     148  </q-n></a>				<q-m>// end</q-m>
 <a name="149"><q-n>     149  </q-n></a>
-<a name="150"><q-n>     150  </q-n></a>				<q-w>else</q-w> <q-w>if</q-w> ((scl_negative == 1) &amp;&amp; (read_ack_to_write_done == 1)) <q-w>begin</q-w>
+<a name="150"><q-n>     150  </q-n></a>				<q-m>// else if ((scl_negative == 1) &amp;&amp; (read_ack_to_write_done == 1)) begin</q-m>
 <a name="151"><q-n>     151  </q-n></a>
-<a name="152"><q-n>     152  </q-n></a>					next_sate       		=    WRITE_DATA   ;
+<a name="152"><q-n>     152  </q-n></a>				<q-m>// 	next_sate       		=    WRITE_DATA   ;</q-m>
 <a name="153"><q-n>     153  </q-n></a>
-<a name="154"><q-n>     154  </q-n></a>				<q-w>end</q-w>				
+<a name="154"><q-n>     154  </q-n></a>				<q-m>// end				</q-m>
 <a name="155"><q-n>     155  </q-n></a>
-<a name="156"><q-n>     156  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
-<a name="157"><q-n>     157  </q-n></a>                    next_sate     =       READ_ACK    ;
-<a name="158"><q-n>     158  </q-n></a>                <q-w>end</q-w>
+<a name="156"><q-n>     156  </q-n></a>                <q-m>// else begin</q-m>
+<a name="157"><q-n>     157  </q-n></a>                <q-m>//     next_sate     =       READ_ACK    ;</q-m>
+<a name="158"><q-n>     158  </q-n></a>                <q-m>// end</q-m>
 <a name="159"><q-n>     159  </q-n></a>
-<a name="160"><q-n>     160  </q-n></a>            <q-w>end</q-w>
-<a name="161"><q-n>     161  </q-n></a>
-<a name="162"><q-n>     162  </q-n></a>            WRITE_DATA  :   <q-w>begin</q-w>
-<a name="163"><q-n>     163  </q-n></a>
-<a name="164"><q-n>     164  </q-n></a>                <q-m>//When the 8 bits data have been transmitted, </q-m>
-<a name="165"><q-n>     165  </q-n></a>                <q-m>//wait for the scl line is high and then move to the next state</q-m>
-<a name="166"><q-n>     166  </q-n></a>                <q-w>if</q-w> (count_scl_posedge == 8 &amp;&amp; scl_negative == 1) <q-w>begin</q-w>
-<a name="167"><q-n>     167  </q-n></a>
-<a name="168"><q-n>     168  </q-n></a>                    next_sate   =   READ_LATER_ACK              ;
-<a name="169"><q-n>     169  </q-n></a>
-<a name="170"><q-n>     170  </q-n></a>                <q-w>end</q-w> 
-<a name="171"><q-n>     171  </q-n></a>
-<a name="172"><q-n>     172  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
+<a name="160"><q-n>     160  </q-n></a>                <q-m>//modify</q-m>
+<a name="161"><q-n>     161  </q-n></a>                <q-w>if</q-w>(scl_negative)
+<a name="162"><q-n>     162  </q-n></a>                <q-w>begin</q-w>
+<a name="163"><q-n>     163  </q-n></a>                    <q-w>if</q-w> (~read_ack_to_read_done &amp;&amp; ~read_ack_to_write_done)
+<a name="164"><q-n>     164  </q-n></a>                        next_sate = STOP;
+<a name="165"><q-n>     165  </q-n></a>                    <q-w>else</q-w> <q-w>if</q-w> (read_ack_to_read_done)
+<a name="166"><q-n>     166  </q-n></a>                        next_sate = READ_DATA;
+<a name="167"><q-n>     167  </q-n></a>                    <q-w>else</q-w>    
+<a name="168"><q-n>     168  </q-n></a>                        next_sate = WRITE_DATA;
+<a name="169"><q-n>     169  </q-n></a>                <q-w>end</q-w>
+<a name="170"><q-n>     170  </q-n></a>                <q-w>else</q-w> 
+<a name="171"><q-n>     171  </q-n></a>                    next_sate = READ_ACK;
+<a name="172"><q-n>     172  </q-n></a>
 <a name="173"><q-n>     173  </q-n></a>
-<a name="174"><q-n>     174  </q-n></a>                    next_sate   =   WRITE_DATA                  ;
+<a name="174"><q-n>     174  </q-n></a>            <q-w>end</q-w>
 <a name="175"><q-n>     175  </q-n></a>
-<a name="176"><q-n>     176  </q-n></a>                <q-w>end</q-w>
+<a name="176"><q-n>     176  </q-n></a>            WRITE_DATA  :   <q-w>begin</q-w>
 <a name="177"><q-n>     177  </q-n></a>
-<a name="178"><q-n>     178  </q-n></a>            <q-w>end</q-w>
-<a name="179"><q-n>     179  </q-n></a>
-<a name="180"><q-n>     180  </q-n></a>            READ_LATER_ACK  :   <q-w>begin</q-w>
+<a name="178"><q-n>     178  </q-n></a>                <q-m>//When the 8 bits data have been transmitted, </q-m>
+<a name="179"><q-n>     179  </q-n></a>                <q-m>//wait for the scl line is high and then move to the next state</q-m>
+<a name="180"><q-n>     180  </q-n></a>                <q-w>if</q-w> (count_scl_posedge == 8 &amp;&amp; scl_negative == 1) <q-w>begin</q-w>
 <a name="181"><q-n>     181  </q-n></a>
-<a name="182"><q-n>     182  </q-n></a>                <q-m>// if (repeat_start_i) begin</q-m>
+<a name="182"><q-n>     182  </q-n></a>                    next_sate   =   READ_LATER_ACK              ;
 <a name="183"><q-n>     183  </q-n></a>
-<a name="184"><q-n>     184  </q-n></a>                <q-m>//     next_sate   =   REPEAT_START                ;</q-m>
+<a name="184"><q-n>     184  </q-n></a>                <q-w>end</q-w> 
 <a name="185"><q-n>     185  </q-n></a>
-<a name="186"><q-n>     186  </q-n></a>                <q-m>// end</q-m>
+<a name="186"><q-n>     186  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
 <a name="187"><q-n>     187  </q-n></a>
-<a name="188"><q-n>     188  </q-n></a>				<q-w>if</q-w> ((scl_negative == 1) &amp;&amp; ( (empty_i == 1) || (read_ack_to_write_done == 0 &amp;&amp; repeat_start_i == 0) ) ) <q-w>begin</q-w>    <q-m>// If slave send NACK and has no repeart start, or TX_FIFO empty -&gt; STOP</q-m>
+<a name="188"><q-n>     188  </q-n></a>                    next_sate   =   WRITE_DATA                  ;
 <a name="189"><q-n>     189  </q-n></a>
-<a name="190"><q-n>     190  </q-n></a>					next_sate	=	STOP	                    ;
+<a name="190"><q-n>     190  </q-n></a>                <q-w>end</q-w>
 <a name="191"><q-n>     191  </q-n></a>
-<a name="192"><q-n>     192  </q-n></a>				<q-w>end</q-w>
+<a name="192"><q-n>     192  </q-n></a>            <q-w>end</q-w>
 <a name="193"><q-n>     193  </q-n></a>
-<a name="194"><q-n>     194  </q-n></a>                <q-w>else</q-w> <q-w>if</q-w> (scl_negative &amp;&amp; ((read_ack_to_write_done == 0 &amp;&amp; repeat_start_i == 1) ) ) <q-w>begin</q-w>    <q-m>//  If slave send NACK and has repeart start -&gt; repeat start</q-m>
-<a name="195"><q-n>     195  </q-n></a>                    
-<a name="196"><q-n>     196  </q-n></a>                    next_sate   =   REPEAT_START    ;
-<a name="197"><q-n>     197  </q-n></a>                <q-w>end</q-w>
-<a name="198"><q-n>     198  </q-n></a>
-<a name="199"><q-n>     199  </q-n></a>				<q-w>else</q-w> <q-w>if</q-w> ((scl_negative) &amp;&amp; (read_ack_to_write_done == 1)) <q-w>begin</q-w>		<q-m>// wait for scl low and then to next state</q-m>
-<a name="200"><q-n>     200  </q-n></a>
-<a name="201"><q-n>     201  </q-n></a>					next_sate				=	WRITE_DATA		;
-<a name="202"><q-n>     202  </q-n></a>
-<a name="203"><q-n>     203  </q-n></a>				<q-w>end</q-w>
-<a name="204"><q-n>     204  </q-n></a>		
-<a name="205"><q-n>     205  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
+<a name="194"><q-n>     194  </q-n></a>            READ_LATER_ACK  :   <q-w>begin</q-w>
+<a name="195"><q-n>     195  </q-n></a>
+<a name="196"><q-n>     196  </q-n></a>				<q-m>// if ((scl_negative == 1) &amp;&amp; ( (empty_i == 1) || (read_ack_to_write_done == 0 &amp;&amp; repeat_start_i == 0) ) ) begin    // If slave send NACK and has no repeart start, or TX_FIFO empty -&gt; STOP</q-m>
+<a name="197"><q-n>     197  </q-n></a>
+<a name="198"><q-n>     198  </q-n></a>				<q-m>// 	next_sate	=	STOP	                    ;</q-m>
+<a name="199"><q-n>     199  </q-n></a>
+<a name="200"><q-n>     200  </q-n></a>				<q-m>// end</q-m>
+<a name="201"><q-n>     201  </q-n></a>
+<a name="202"><q-n>     202  </q-n></a>                <q-m>// else if (scl_negative &amp;&amp; ((read_ack_to_write_done == 0) ) ) begin    //  If slave send NACK and has repeart start -&gt; repeat start</q-m>
+<a name="203"><q-n>     203  </q-n></a>                    
+<a name="204"><q-n>     204  </q-n></a>                <q-m>//     next_sate   =   REPEAT_START    ;</q-m>
+<a name="205"><q-n>     205  </q-n></a>                <q-m>// end</q-m>
 <a name="206"><q-n>     206  </q-n></a>
-<a name="207"><q-n>     207  </q-n></a>                    next_sate           =       READ_LATER_ACK  ;
+<a name="207"><q-n>     207  </q-n></a>				<q-m>// else if ((scl_negative) &amp;&amp; (read_ack_to_write_done == 1)) begin		// wait for scl low and then to next state</q-m>
 <a name="208"><q-n>     208  </q-n></a>
-<a name="209"><q-n>     209  </q-n></a>                <q-w>end</q-w>
+<a name="209"><q-n>     209  </q-n></a>				<q-m>// 	next_sate				=	WRITE_DATA		;</q-m>
 <a name="210"><q-n>     210  </q-n></a>
-<a name="211"><q-n>     211  </q-n></a>            <q-w>end</q-w>
-<a name="212"><q-n>     212  </q-n></a>
-<a name="213"><q-n>     213  </q-n></a>            READ_DATA   :   <q-w>begin</q-w>
+<a name="211"><q-n>     211  </q-n></a>				<q-m>// end</q-m>
+<a name="212"><q-n>     212  </q-n></a>		
+<a name="213"><q-n>     213  </q-n></a>                <q-m>// else begin</q-m>
 <a name="214"><q-n>     214  </q-n></a>
-<a name="215"><q-n>     215  </q-n></a>                <q-w>if</q-w> (count_scl_posedge == 8 &amp;&amp; scl_negative == 1) <q-w>begin</q-w>
-<a name="216"><q-n>     216  </q-n></a>                    next_sate       =       WRITE_ACK       ;
-<a name="217"><q-n>     217  </q-n></a>                    
-<a name="218"><q-n>     218  </q-n></a>                <q-w>end</q-w> 
-<a name="219"><q-n>     219  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
-<a name="220"><q-n>     220  </q-n></a>                    next_sate       =       READ_DATA       ;
-<a name="221"><q-n>     221  </q-n></a>                <q-w>end</q-w>
-<a name="222"><q-n>     222  </q-n></a>
-<a name="223"><q-n>     223  </q-n></a>            <q-w>end</q-w>
-<a name="224"><q-n>     224  </q-n></a>
-<a name="225"><q-n>     225  </q-n></a>            WRITE_ACK   :   <q-w>begin</q-w>
-<a name="226"><q-n>     226  </q-n></a>
-<a name="227"><q-n>     227  </q-n></a>				<q-w>if</q-w> (scl_negative) <q-w>begin</q-w>
-<a name="228"><q-n>     228  </q-n></a>
-<a name="229"><q-n>     229  </q-n></a>                	<q-w>if</q-w> (repeat_start_i) <q-w>begin</q-w>
-<a name="230"><q-n>     230  </q-n></a>                    	next_sate       =      REPEAT_START     ; 
-<a name="231"><q-n>     231  </q-n></a>                	<q-w>end</q-w> 
-<a name="232"><q-n>     232  </q-n></a>                	<q-w>else</q-w> <q-w>if</q-w> (full_i == 0) <q-w>begin</q-w>
-<a name="233"><q-n>     233  </q-n></a>                    	next_sate       =       READ_DATA       ;
-<a name="234"><q-n>     234  </q-n></a>                	<q-w>end</q-w>
-<a name="235"><q-n>     235  </q-n></a>                	<q-w>else</q-w> <q-w>begin</q-w>
-<a name="236"><q-n>     236  </q-n></a>                    	next_sate       =       STOP            ;
-<a name="237"><q-n>     237  </q-n></a>                	<q-w>end</q-w>
+<a name="215"><q-n>     215  </q-n></a>                <q-m>//     next_sate           =       READ_LATER_ACK  ;</q-m>
+<a name="216"><q-n>     216  </q-n></a>
+<a name="217"><q-n>     217  </q-n></a>                <q-m>// end</q-m>
+<a name="218"><q-n>     218  </q-n></a>
+<a name="219"><q-n>     219  </q-n></a>
+<a name="220"><q-n>     220  </q-n></a>                <q-m>//modify</q-m>
+<a name="221"><q-n>     221  </q-n></a>                <q-w>if</q-w> (scl_negative)
+<a name="222"><q-n>     222  </q-n></a>                <q-w>begin</q-w>
+<a name="223"><q-n>     223  </q-n></a>                    <q-w>if</q-w> (empty_i || (~read_ack_to_write_done &amp;&amp; ~repeat_start_i))
+<a name="224"><q-n>     224  </q-n></a>                        next_sate = STOP;
+<a name="225"><q-n>     225  </q-n></a>                    <q-w>else</q-w> <q-w>if</q-w> (read_ack_to_write_done)
+<a name="226"><q-n>     226  </q-n></a>                        next_sate = WRITE_DATA;
+<a name="227"><q-n>     227  </q-n></a>                    <q-w>else</q-w>
+<a name="228"><q-n>     228  </q-n></a>                        next_sate = REPEAT_START;
+<a name="229"><q-n>     229  </q-n></a>                <q-w>end</q-w>
+<a name="230"><q-n>     230  </q-n></a>                <q-w>else</q-w>
+<a name="231"><q-n>     231  </q-n></a>                    next_sate = READ_LATER_ACK;
+<a name="232"><q-n>     232  </q-n></a>
+<a name="233"><q-n>     233  </q-n></a>                <q-m>//</q-m>
+<a name="234"><q-n>     234  </q-n></a>
+<a name="235"><q-n>     235  </q-n></a>            <q-w>end</q-w>
+<a name="236"><q-n>     236  </q-n></a>
+<a name="237"><q-n>     237  </q-n></a>            READ_DATA   :   <q-w>begin</q-w>
 <a name="238"><q-n>     238  </q-n></a>
-<a name="239"><q-n>     239  </q-n></a>				<q-w>end</q-w>
-<a name="240"><q-n>     240  </q-n></a>				<q-w>else</q-w> <q-w>begin</q-w>
-<a name="241"><q-n>     241  </q-n></a>					next_sate		=		WRITE_ACK		;
-<a name="242"><q-n>     242  </q-n></a>				<q-w>end</q-w>
-<a name="243"><q-n>     243  </q-n></a>
-<a name="244"><q-n>     244  </q-n></a>            <q-w>end</q-w>
-<a name="245"><q-n>     245  </q-n></a>
-<a name="246"><q-n>     246  </q-n></a>            REPEAT_START    :    <q-w>begin</q-w>
-<a name="247"><q-n>     247  </q-n></a>                <q-w>if</q-w> (scl_positive) <q-w>begin</q-w>                                 <q-m>//  Wait to when scl negative and then to next_state</q-m>
-<a name="248"><q-n>     248  </q-n></a>                    next_sate           =       START         ;
-<a name="249"><q-n>     249  </q-n></a>                <q-w>end</q-w>
-<a name="250"><q-n>     250  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
-<a name="251"><q-n>     251  </q-n></a>                    next_sate           =       REPEAT_START    ;
-<a name="252"><q-n>     252  </q-n></a>                <q-w>end</q-w>
-<a name="253"><q-n>     253  </q-n></a>
-<a name="254"><q-n>     254  </q-n></a>            <q-w>end</q-w>
-<a name="255"><q-n>     255  </q-n></a>
-<a name="256"><q-n>     256  </q-n></a>            STOP    :   <q-w>begin</q-w>
-<a name="257"><q-n>     257  </q-n></a>
-<a name="258"><q-n>     258  </q-n></a>				<q-w>if</q-w> (scl_positive) <q-w>begin</q-w>
-<a name="259"><q-n>     259  </q-n></a>                	next_sate           	=       IDLE            ;
-<a name="260"><q-n>     260  </q-n></a>				<q-w>end</q-w>
-<a name="261"><q-n>     261  </q-n></a>				<q-w>else</q-w> <q-w>begin</q-w>
-<a name="262"><q-n>     262  </q-n></a>					next_sate				=		STOP			;
+<a name="239"><q-n>     239  </q-n></a>                <q-w>if</q-w> (count_scl_posedge == 8 &amp;&amp; scl_negative == 1) <q-w>begin</q-w>
+<a name="240"><q-n>     240  </q-n></a>                    next_sate       =       WRITE_ACK       ;
+<a name="241"><q-n>     241  </q-n></a>                    
+<a name="242"><q-n>     242  </q-n></a>                <q-w>end</q-w> 
+<a name="243"><q-n>     243  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
+<a name="244"><q-n>     244  </q-n></a>                    next_sate       =       READ_DATA       ;
+<a name="245"><q-n>     245  </q-n></a>                <q-w>end</q-w>
+<a name="246"><q-n>     246  </q-n></a>
+<a name="247"><q-n>     247  </q-n></a>            <q-w>end</q-w>
+<a name="248"><q-n>     248  </q-n></a>
+<a name="249"><q-n>     249  </q-n></a>            WRITE_ACK   :   <q-w>begin</q-w>
+<a name="250"><q-n>     250  </q-n></a>
+<a name="251"><q-n>     251  </q-n></a>				<q-w>if</q-w> (scl_negative) <q-w>begin</q-w>
+<a name="252"><q-n>     252  </q-n></a>
+<a name="253"><q-n>     253  </q-n></a>                	<q-w>if</q-w> (repeat_start_i) <q-w>begin</q-w>
+<a name="254"><q-n>     254  </q-n></a>                    	next_sate       =      REPEAT_START     ; 
+<a name="255"><q-n>     255  </q-n></a>                	<q-w>end</q-w> 
+<a name="256"><q-n>     256  </q-n></a>                	<q-w>else</q-w> <q-w>if</q-w> (full_i == 0) <q-w>begin</q-w>
+<a name="257"><q-n>     257  </q-n></a>                    	next_sate       =       READ_DATA       ;
+<a name="258"><q-n>     258  </q-n></a>                	<q-w>end</q-w>
+<a name="259"><q-n>     259  </q-n></a>                	<q-w>else</q-w> <q-w>begin</q-w>
+<a name="260"><q-n>     260  </q-n></a>                    	next_sate       =       STOP            ;
+<a name="261"><q-n>     261  </q-n></a>                	<q-w>end</q-w>
+<a name="262"><q-n>     262  </q-n></a>
 <a name="263"><q-n>     263  </q-n></a>				<q-w>end</q-w>
-<a name="264"><q-n>     264  </q-n></a>
-<a name="265"><q-n>     265  </q-n></a>            <q-w>end</q-w>
-<a name="266"><q-n>     266  </q-n></a>
+<a name="264"><q-n>     264  </q-n></a>				<q-w>else</q-w> <q-w>begin</q-w>
+<a name="265"><q-n>     265  </q-n></a>					next_sate		=		WRITE_ACK		;
+<a name="266"><q-n>     266  </q-n></a>				<q-w>end</q-w>
 <a name="267"><q-n>     267  </q-n></a>
-<a name="268"><q-n>     268  </q-n></a>            <q-w>default</q-w>: next_sate      	=       IDLE            ;
-<a name="269"><q-n>     269  </q-n></a>        <q-w>endcase</q-w>
-<a name="270"><q-n>     270  </q-n></a>
-<a name="271"><q-n>     271  </q-n></a>    <q-w>end</q-w>
-<a name="272"><q-n>     272  </q-n></a>
-<a name="273"><q-n>     273  </q-n></a>    <q-m>// Output and internal signal combinational logic</q-m>
-<a name="274"><q-n>     274  </q-n></a>    <q-w>always</q-w> @(*) <q-w>begin</q-w>
-<a name="275"><q-n>     275  </q-n></a>        
-<a name="276"><q-n>     276  </q-n></a>        <q-w>case</q-w> (currrent_state)
-<a name="277"><q-n>     277  </q-n></a>            
-<a name="278"><q-n>     278  </q-n></a>            IDLE            :   <q-w>begin</q-w>
-<a name="279"><q-n>     279  </q-n></a>                <q-m>//  Output</q-m>
-<a name="280"><q-n>     280  </q-n></a>                clk_en_o            =       0           ;
-<a name="281"><q-n>     281  </q-n></a>                sda_low_en_o        =       0           ;
-<a name="282"><q-n>     282  </q-n></a>                write_data_en_o     =       0           ;
-<a name="283"><q-n>     283  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="284"><q-n>     284  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="285"><q-n>     285  </q-n></a>                i2c_sda_en_o        =       0           ;
-<a name="286"><q-n>     286  </q-n></a>                i2c_scl_en_o        =       0           ;
-<a name="287"><q-n>     287  </q-n></a>
-<a name="288"><q-n>     288  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="289"><q-n>     289  </q-n></a>                start_done              =   0           ;
-<a name="290"><q-n>     290  </q-n></a>            <q-w>end</q-w>
+<a name="268"><q-n>     268  </q-n></a>            <q-w>end</q-w>
+<a name="269"><q-n>     269  </q-n></a>
+<a name="270"><q-n>     270  </q-n></a>            REPEAT_START    :    <q-w>begin</q-w>
+<a name="271"><q-n>     271  </q-n></a>                <q-w>if</q-w> (scl_positive) <q-w>begin</q-w>                                 <q-m>//  Wait to when scl negative and then to next_state</q-m>
+<a name="272"><q-n>     272  </q-n></a>                    next_sate           =       START         ;
+<a name="273"><q-n>     273  </q-n></a>                <q-w>end</q-w>
+<a name="274"><q-n>     274  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
+<a name="275"><q-n>     275  </q-n></a>                    next_sate           =       REPEAT_START    ;
+<a name="276"><q-n>     276  </q-n></a>                <q-w>end</q-w>
+<a name="277"><q-n>     277  </q-n></a>
+<a name="278"><q-n>     278  </q-n></a>            <q-w>end</q-w>
+<a name="279"><q-n>     279  </q-n></a>
+<a name="280"><q-n>     280  </q-n></a>            STOP    :   <q-w>begin</q-w>
+<a name="281"><q-n>     281  </q-n></a>
+<a name="282"><q-n>     282  </q-n></a>				<q-w>if</q-w> (scl_positive) <q-w>begin</q-w>
+<a name="283"><q-n>     283  </q-n></a>                	next_sate           	=       IDLE            ;
+<a name="284"><q-n>     284  </q-n></a>				<q-w>end</q-w>
+<a name="285"><q-n>     285  </q-n></a>				<q-w>else</q-w> <q-w>begin</q-w>
+<a name="286"><q-n>     286  </q-n></a>					next_sate				=		STOP			;
+<a name="287"><q-n>     287  </q-n></a>				<q-w>end</q-w>
+<a name="288"><q-n>     288  </q-n></a>
+<a name="289"><q-n>     289  </q-n></a>            <q-w>end</q-w>
+<a name="290"><q-n>     290  </q-n></a>
 <a name="291"><q-n>     291  </q-n></a>
-<a name="292"><q-n>     292  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="293"><q-n>     293  </q-n></a>            START           :   <q-w>begin</q-w>
-<a name="294"><q-n>     294  </q-n></a>                clk_en_o            =       1           ;
-<a name="295"><q-n>     295  </q-n></a>                sda_low_en_o        =       1           ;
-<a name="296"><q-n>     296  </q-n></a>                write_data_en_o     =       0           ;
-<a name="297"><q-n>     297  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="298"><q-n>     298  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="299"><q-n>     299  </q-n></a>                i2c_sda_en_o        =       1           ;
-<a name="300"><q-n>     300  </q-n></a>                i2c_scl_en_o        =       1           ;
-<a name="301"><q-n>     301  </q-n></a>                
-<a name="302"><q-n>     302  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="303"><q-n>     303  </q-n></a>                start_done              =   1           ;
-<a name="304"><q-n>     304  </q-n></a>            <q-w>end</q-w>
-<a name="305"><q-n>     305  </q-n></a>
-<a name="306"><q-n>     306  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="307"><q-n>     307  </q-n></a>            ADDRESS         :   <q-w>begin</q-w>
-<a name="308"><q-n>     308  </q-n></a>                clk_en_o            =       1           ;
-<a name="309"><q-n>     309  </q-n></a>                sda_low_en_o        =       0           ;
-<a name="310"><q-n>     310  </q-n></a>                write_data_en_o     =       0           ;
-<a name="311"><q-n>     311  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="312"><q-n>     312  </q-n></a>
-<a name="313"><q-n>     313  </q-n></a>                <q-m>//when scl is low, we can write address of slave on sda line</q-m>
-<a name="314"><q-n>     314  </q-n></a>                <q-w>if</q-w> (i2c_scl_i == 0)    
-<a name="315"><q-n>     315  </q-n></a>                    write_addr_en_o     =       1       ;
-<a name="316"><q-n>     316  </q-n></a>                <q-w>else</q-w>    
-<a name="317"><q-n>     317  </q-n></a>                    write_addr_en_o     =       0       ;
-<a name="318"><q-n>     318  </q-n></a>
-<a name="319"><q-n>     319  </q-n></a>				i2c_sda_en_o    		=       1       ;
-<a name="320"><q-n>     320  </q-n></a>                i2c_scl_en_o        	=       1       ;
-<a name="321"><q-n>     321  </q-n></a>                
-<a name="322"><q-n>     322  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="323"><q-n>     323  </q-n></a>                start_done              =   1           ;
-<a name="324"><q-n>     324  </q-n></a>            <q-w>end</q-w>
-<a name="325"><q-n>     325  </q-n></a>
-<a name="326"><q-n>     326  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="327"><q-n>     327  </q-n></a>            READ_ACK        :   <q-w>begin</q-w>
-<a name="328"><q-n>     328  </q-n></a>                <q-m>// Output</q-m>
-<a name="329"><q-n>     329  </q-n></a>                clk_en_o            =       1           ;
-<a name="330"><q-n>     330  </q-n></a>                sda_low_en_o        =       0           ;
-<a name="331"><q-n>     331  </q-n></a>                write_data_en_o     =       0           ;
-<a name="332"><q-n>     332  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="333"><q-n>     333  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="334"><q-n>     334  </q-n></a>                i2c_sda_en_o        =       0           ;
-<a name="335"><q-n>     335  </q-n></a>                i2c_scl_en_o        =       1           ;
+<a name="292"><q-n>     292  </q-n></a>            <q-w>default</q-w>: next_sate      	=       IDLE            ;
+<a name="293"><q-n>     293  </q-n></a>        <q-w>endcase</q-w>
+<a name="294"><q-n>     294  </q-n></a>
+<a name="295"><q-n>     295  </q-n></a>    <q-w>end</q-w>
+<a name="296"><q-n>     296  </q-n></a>
+<a name="297"><q-n>     297  </q-n></a>    <q-m>// Output and internal signal combinational logic</q-m>
+<a name="298"><q-n>     298  </q-n></a>    <q-w>always</q-w> @(*) <q-w>begin</q-w>
+<a name="299"><q-n>     299  </q-n></a>        
+<a name="300"><q-n>     300  </q-n></a>        <q-w>case</q-w> (currrent_state)
+<a name="301"><q-n>     301  </q-n></a>            
+<a name="302"><q-n>     302  </q-n></a>            IDLE            :   <q-w>begin</q-w>
+<a name="303"><q-n>     303  </q-n></a>                <q-m>//  Output</q-m>
+<a name="304"><q-n>     304  </q-n></a>                clk_en_o            =       0           ;
+<a name="305"><q-n>     305  </q-n></a>                sda_low_en_o        =       0           ;
+<a name="306"><q-n>     306  </q-n></a>                write_data_en_o     =       0           ;
+<a name="307"><q-n>     307  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="308"><q-n>     308  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="309"><q-n>     309  </q-n></a>                i2c_sda_en_o        =       0           ;
+<a name="310"><q-n>     310  </q-n></a>                i2c_scl_en_o        =       0           ;
+<a name="311"><q-n>     311  </q-n></a>
+<a name="312"><q-n>     312  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="313"><q-n>     313  </q-n></a>                start_done              =   0           ;
+<a name="314"><q-n>     314  </q-n></a>            <q-w>end</q-w>
+<a name="315"><q-n>     315  </q-n></a>
+<a name="316"><q-n>     316  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="317"><q-n>     317  </q-n></a>            START           :   <q-w>begin</q-w>
+<a name="318"><q-n>     318  </q-n></a>                clk_en_o            =       1           ;
+<a name="319"><q-n>     319  </q-n></a>                sda_low_en_o        =       1           ;
+<a name="320"><q-n>     320  </q-n></a>                write_data_en_o     =       0           ;
+<a name="321"><q-n>     321  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="322"><q-n>     322  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="323"><q-n>     323  </q-n></a>                i2c_sda_en_o        =       1           ;
+<a name="324"><q-n>     324  </q-n></a>                i2c_scl_en_o        =       1           ;
+<a name="325"><q-n>     325  </q-n></a>                
+<a name="326"><q-n>     326  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="327"><q-n>     327  </q-n></a>                start_done              =   1           ;
+<a name="328"><q-n>     328  </q-n></a>            <q-w>end</q-w>
+<a name="329"><q-n>     329  </q-n></a>
+<a name="330"><q-n>     330  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="331"><q-n>     331  </q-n></a>            ADDRESS         :   <q-w>begin</q-w>
+<a name="332"><q-n>     332  </q-n></a>                clk_en_o            =       1           ;
+<a name="333"><q-n>     333  </q-n></a>                sda_low_en_o        =       0           ;
+<a name="334"><q-n>     334  </q-n></a>                write_data_en_o     =       0           ;
+<a name="335"><q-n>     335  </q-n></a>                receive_data_en_o   =       0           ;
 <a name="336"><q-n>     336  </q-n></a>
-<a name="337"><q-n>     337  </q-n></a>                <q-m>//Internal signal</q-m>
-<a name="338"><q-n>     338  </q-n></a>                start_done              =   1           ;
-<a name="339"><q-n>     339  </q-n></a>            <q-w>end</q-w>
-<a name="340"><q-n>     340  </q-n></a>
-<a name="341"><q-n>     341  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="342"><q-n>     342  </q-n></a>            WRITE_DATA      :   <q-w>begin</q-w>
-<a name="343"><q-n>     343  </q-n></a>                clk_en_o            =       1           ;
-<a name="344"><q-n>     344  </q-n></a>                sda_low_en_o        =       0           ;
-<a name="345"><q-n>     345  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="346"><q-n>     346  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="347"><q-n>     347  </q-n></a>
-<a name="348"><q-n>     348  </q-n></a>                <q-m>//when scl is low, we can write data on sda line</q-m>
-<a name="349"><q-n>     349  </q-n></a>                <q-w>if</q-w> (i2c_scl_i == 0)    
-<a name="350"><q-n>     350  </q-n></a>                    write_data_en_o     =       1           ;
-<a name="351"><q-n>     351  </q-n></a>                <q-w>else</q-w>    
-<a name="352"><q-n>     352  </q-n></a>                    write_data_en_o     =       0           ;
-<a name="353"><q-n>     353  </q-n></a>
-<a name="354"><q-n>     354  </q-n></a>				i2c_sda_en_o    		=       1           ;
-<a name="355"><q-n>     355  </q-n></a>                i2c_scl_en_o        	=       1           ;
-<a name="356"><q-n>     356  </q-n></a>                                
-<a name="357"><q-n>     357  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="358"><q-n>     358  </q-n></a>                start_done              =   1           ;                
-<a name="359"><q-n>     359  </q-n></a>            <q-w>end</q-w>
+<a name="337"><q-n>     337  </q-n></a>                <q-m>//when scl is low, we can write address of slave on sda line</q-m>
+<a name="338"><q-n>     338  </q-n></a>                <q-w>if</q-w> (i2c_scl_i == 0)    
+<a name="339"><q-n>     339  </q-n></a>                    write_addr_en_o     =       1       ;
+<a name="340"><q-n>     340  </q-n></a>                <q-w>else</q-w>    
+<a name="341"><q-n>     341  </q-n></a>                    write_addr_en_o     =       0       ;
+<a name="342"><q-n>     342  </q-n></a>
+<a name="343"><q-n>     343  </q-n></a>				i2c_sda_en_o    		=       1       ;
+<a name="344"><q-n>     344  </q-n></a>                i2c_scl_en_o        	=       1       ;
+<a name="345"><q-n>     345  </q-n></a>                
+<a name="346"><q-n>     346  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="347"><q-n>     347  </q-n></a>                start_done              =   1           ;
+<a name="348"><q-n>     348  </q-n></a>            <q-w>end</q-w>
+<a name="349"><q-n>     349  </q-n></a>
+<a name="350"><q-n>     350  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="351"><q-n>     351  </q-n></a>            READ_ACK        :   <q-w>begin</q-w>
+<a name="352"><q-n>     352  </q-n></a>                <q-m>// Output</q-m>
+<a name="353"><q-n>     353  </q-n></a>                clk_en_o            =       1           ;
+<a name="354"><q-n>     354  </q-n></a>                sda_low_en_o        =       0           ;
+<a name="355"><q-n>     355  </q-n></a>                write_data_en_o     =       0           ;
+<a name="356"><q-n>     356  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="357"><q-n>     357  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="358"><q-n>     358  </q-n></a>                i2c_sda_en_o        =       0           ;
+<a name="359"><q-n>     359  </q-n></a>                i2c_scl_en_o        =       1           ;
 <a name="360"><q-n>     360  </q-n></a>
-<a name="361"><q-n>     361  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="362"><q-n>     362  </q-n></a>            READ_LATER_ACK  :   <q-w>begin</q-w>
-<a name="363"><q-n>     363  </q-n></a>                clk_en_o            =       1           ;
-<a name="364"><q-n>     364  </q-n></a>                sda_low_en_o        =       1           ;
-<a name="365"><q-n>     365  </q-n></a>                write_data_en_o     =       0           ;
-<a name="366"><q-n>     366  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="367"><q-n>     367  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="368"><q-n>     368  </q-n></a>                i2c_sda_en_o        =       0           ;
-<a name="369"><q-n>     369  </q-n></a>                i2c_scl_en_o        =       1           ;
-<a name="370"><q-n>     370  </q-n></a>
-<a name="371"><q-n>     371  </q-n></a>                <q-m>// Internal signal</q-m>
-<a name="372"><q-n>     372  </q-n></a>                start_done              =   1           ;
-<a name="373"><q-n>     373  </q-n></a>            <q-w>end</q-w>
-<a name="374"><q-n>     374  </q-n></a>
-<a name="375"><q-n>     375  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="376"><q-n>     376  </q-n></a>            READ_DATA       :   <q-w>begin</q-w>
-<a name="377"><q-n>     377  </q-n></a>                clk_en_o            =       1           ;
-<a name="378"><q-n>     378  </q-n></a>                sda_low_en_o        =       0           ;
-<a name="379"><q-n>     379  </q-n></a>                write_data_en_o     =       0           ;
-<a name="380"><q-n>     380  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="381"><q-n>     381  </q-n></a>
-<a name="382"><q-n>     382  </q-n></a>                <q-m>//when scl is hight, we can receive data from sda</q-m>
-<a name="383"><q-n>     383  </q-n></a>                <q-w>if</q-w> (i2c_scl_i)    
-<a name="384"><q-n>     384  </q-n></a>                    receive_data_en_o   =       1       ;
-<a name="385"><q-n>     385  </q-n></a>                <q-w>else</q-w>    
-<a name="386"><q-n>     386  </q-n></a>                    receive_data_en_o   =       0       ;
-<a name="387"><q-n>     387  </q-n></a>
-<a name="388"><q-n>     388  </q-n></a>                i2c_sda_en_o        =       0           ;
-<a name="389"><q-n>     389  </q-n></a>                i2c_scl_en_o        =       1           ;
-<a name="390"><q-n>     390  </q-n></a>                                
-<a name="391"><q-n>     391  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="392"><q-n>     392  </q-n></a>                start_done              =   1           ;
-<a name="393"><q-n>     393  </q-n></a>            <q-w>end</q-w>
+<a name="361"><q-n>     361  </q-n></a>                <q-m>//Internal signal</q-m>
+<a name="362"><q-n>     362  </q-n></a>                start_done              =   1           ;
+<a name="363"><q-n>     363  </q-n></a>            <q-w>end</q-w>
+<a name="364"><q-n>     364  </q-n></a>
+<a name="365"><q-n>     365  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="366"><q-n>     366  </q-n></a>            WRITE_DATA      :   <q-w>begin</q-w>
+<a name="367"><q-n>     367  </q-n></a>                clk_en_o            =       1           ;
+<a name="368"><q-n>     368  </q-n></a>                sda_low_en_o        =       0           ;
+<a name="369"><q-n>     369  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="370"><q-n>     370  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="371"><q-n>     371  </q-n></a>
+<a name="372"><q-n>     372  </q-n></a>                <q-m>//when scl is low, we can write data on sda line</q-m>
+<a name="373"><q-n>     373  </q-n></a>                <q-w>if</q-w> (i2c_scl_i == 0)    
+<a name="374"><q-n>     374  </q-n></a>                    write_data_en_o     =       1           ;
+<a name="375"><q-n>     375  </q-n></a>                <q-w>else</q-w>    
+<a name="376"><q-n>     376  </q-n></a>                    write_data_en_o     =       0           ;
+<a name="377"><q-n>     377  </q-n></a>
+<a name="378"><q-n>     378  </q-n></a>				i2c_sda_en_o    		=       1           ;
+<a name="379"><q-n>     379  </q-n></a>                i2c_scl_en_o        	=       1           ;
+<a name="380"><q-n>     380  </q-n></a>                                
+<a name="381"><q-n>     381  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="382"><q-n>     382  </q-n></a>                start_done              =   1           ;                
+<a name="383"><q-n>     383  </q-n></a>            <q-w>end</q-w>
+<a name="384"><q-n>     384  </q-n></a>
+<a name="385"><q-n>     385  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="386"><q-n>     386  </q-n></a>            READ_LATER_ACK  :   <q-w>begin</q-w>
+<a name="387"><q-n>     387  </q-n></a>                clk_en_o            =       1           ;
+<a name="388"><q-n>     388  </q-n></a>                sda_low_en_o        =       1           ;
+<a name="389"><q-n>     389  </q-n></a>                write_data_en_o     =       0           ;
+<a name="390"><q-n>     390  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="391"><q-n>     391  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="392"><q-n>     392  </q-n></a>                i2c_sda_en_o        =       0           ;
+<a name="393"><q-n>     393  </q-n></a>                i2c_scl_en_o        =       1           ;
 <a name="394"><q-n>     394  </q-n></a>
-<a name="395"><q-n>     395  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="396"><q-n>     396  </q-n></a>            WRITE_ACK       :   <q-w>begin</q-w>
-<a name="397"><q-n>     397  </q-n></a>                clk_en_o            =       1           ;
-<a name="398"><q-n>     398  </q-n></a>                sda_low_en_o        =       1           ;
-<a name="399"><q-n>     399  </q-n></a>                write_data_en_o     =       0           ;
-<a name="400"><q-n>     400  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="401"><q-n>     401  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="402"><q-n>     402  </q-n></a>                <q-w>if</q-w> (full_i)
-<a name="403"><q-n>     403  </q-n></a>                    i2c_sda_en_o    =       0           ;   <q-m>//  if RX_FIFO full send NACK to slave</q-m>
-<a name="404"><q-n>     404  </q-n></a>                <q-w>else</q-w>
-<a name="405"><q-n>     405  </q-n></a>                    i2c_sda_en_o    =       1           ;
-<a name="406"><q-n>     406  </q-n></a>                i2c_scl_en_o        =       1           ;
-<a name="407"><q-n>     407  </q-n></a>                                
-<a name="408"><q-n>     408  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="409"><q-n>     409  </q-n></a>                start_done              =   1           ;
-<a name="410"><q-n>     410  </q-n></a>            <q-w>end</q-w>
+<a name="395"><q-n>     395  </q-n></a>                <q-m>// Internal signal</q-m>
+<a name="396"><q-n>     396  </q-n></a>                start_done              =   1           ;
+<a name="397"><q-n>     397  </q-n></a>            <q-w>end</q-w>
+<a name="398"><q-n>     398  </q-n></a>
+<a name="399"><q-n>     399  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="400"><q-n>     400  </q-n></a>            READ_DATA       :   <q-w>begin</q-w>
+<a name="401"><q-n>     401  </q-n></a>                clk_en_o            =       1           ;
+<a name="402"><q-n>     402  </q-n></a>                sda_low_en_o        =       0           ;
+<a name="403"><q-n>     403  </q-n></a>                write_data_en_o     =       0           ;
+<a name="404"><q-n>     404  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="405"><q-n>     405  </q-n></a>
+<a name="406"><q-n>     406  </q-n></a>                <q-m>//when scl is hight, we can receive data from sda</q-m>
+<a name="407"><q-n>     407  </q-n></a>                <q-w>if</q-w> (i2c_scl_i)    
+<a name="408"><q-n>     408  </q-n></a>                    receive_data_en_o   =       1       ;
+<a name="409"><q-n>     409  </q-n></a>                <q-w>else</q-w>    
+<a name="410"><q-n>     410  </q-n></a>                    receive_data_en_o   =       0       ;
 <a name="411"><q-n>     411  </q-n></a>
-<a name="412"><q-n>     412  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="413"><q-n>     413  </q-n></a>            REPEAT_START    :   <q-w>begin</q-w>
-<a name="414"><q-n>     414  </q-n></a>                clk_en_o            =       1           ;
-<a name="415"><q-n>     415  </q-n></a>				sda_low_en_o    	=       0           ;
-<a name="416"><q-n>     416  </q-n></a>                write_data_en_o     =       0           ;
-<a name="417"><q-n>     417  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="418"><q-n>     418  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="419"><q-n>     419  </q-n></a>                i2c_sda_en_o        =       0           ; <q-m>// off i2c_sda_en to pull sda upto 1</q-m>
-<a name="420"><q-n>     420  </q-n></a>                i2c_scl_en_o        =       1           ;
-<a name="421"><q-n>     421  </q-n></a>                
-<a name="422"><q-n>     422  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="423"><q-n>     423  </q-n></a>                start_done              =   1           ;
-<a name="424"><q-n>     424  </q-n></a>            <q-w>end</q-w>
-<a name="425"><q-n>     425  </q-n></a>
-<a name="426"><q-n>     426  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
-<a name="427"><q-n>     427  </q-n></a>            STOP            :   <q-w>begin</q-w>
-<a name="428"><q-n>     428  </q-n></a>                clk_en_o            =       1           ;
-<a name="429"><q-n>     429  </q-n></a>                <q-w>if</q-w> (i2c_sda_i == 1) <q-w>begin</q-w>                   <q-m>//  If sda is high, we will set sda to low</q-m>
-<a name="430"><q-n>     430  </q-n></a>                    sda_low_en_o    =       1           ;
-<a name="431"><q-n>     431  </q-n></a>                <q-w>end</q-w>
-<a name="432"><q-n>     432  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
-<a name="433"><q-n>     433  </q-n></a>                    sda_low_en_o    =       0           ;
-<a name="434"><q-n>     434  </q-n></a>                <q-w>end</q-w>
-<a name="435"><q-n>     435  </q-n></a>                
-<a name="436"><q-n>     436  </q-n></a>                write_data_en_o     =       0           ;
-<a name="437"><q-n>     437  </q-n></a>                write_addr_en_o     =       0           ;
-<a name="438"><q-n>     438  </q-n></a>                receive_data_en_o   =       0           ;
-<a name="439"><q-n>     439  </q-n></a>                i2c_sda_en_o        =       1           ;
-<a name="440"><q-n>     440  </q-n></a>                i2c_scl_en_o        =       1           ;
-<a name="441"><q-n>     441  </q-n></a>                                
-<a name="442"><q-n>     442  </q-n></a>                <q-m>//  Internal signal</q-m>
-<a name="443"><q-n>     443  </q-n></a>                start_done              =   1           ;
-<a name="444"><q-n>     444  </q-n></a>            <q-w>end</q-w>
-<a name="445"><q-n>     445  </q-n></a>        <q-w>endcase</q-w>
-<a name="446"><q-n>     446  </q-n></a>
-<a name="447"><q-n>     447  </q-n></a>    <q-w>end</q-w>
-<a name="448"><q-n>     448  </q-n></a>
-<a name="449"><q-n>     449  </q-n></a>    <q-m>//--------------------------------------------------------------------</q-m>
-<a name="450"><q-n>     450  </q-n></a>    <q-m>// Detect positive scl</q-m>
-<a name="451"><q-n>     451  </q-n></a>
-<a name="452"><q-n>     452  </q-n></a>    <q-w>always</q-w> @(<q-a>posedge</q-w>    i2c_core_clk_i, <q-a>negedge</q-w>     reset_ni) <q-w>begin</q-w>
-<a name="453"><q-n>     453  </q-n></a>        <q-w>if</q-w> (~reset_ni) <q-w>begin</q-w>
-<a name="454"><q-n>     454  </q-n></a>            scl_later   &lt;=  1              ;
-<a name="455"><q-n>     455  </q-n></a>        <q-w>end</q-w>
-<a name="456"><q-n>     456  </q-n></a>        <q-w>else</q-w> <q-w>begin</q-w>
-<a name="457"><q-n>     457  </q-n></a>            scl_later   &lt;=  i2c_scl_i       ;
-<a name="458"><q-n>     458  </q-n></a>        <q-w>end</q-w>
-<a name="459"><q-n>     459  </q-n></a>    <q-w>end</q-w>
-<a name="460"><q-n>     460  </q-n></a>
-<a name="461"><q-n>     461  </q-n></a>    <q-w>assign</q-w>  scl_positive = i2c_scl_i &amp; (~scl_later) 	;
-<a name="462"><q-n>     462  </q-n></a>	<q-w>assign</q-w> 	scl_negative = (~i2c_scl_i) &amp; (scl_later)	;
-<a name="463"><q-n>     463  </q-n></a>
-<a name="464"><q-n>     464  </q-n></a>    <q-m>// end detect positive scl</q-m>
-<a name="465"><q-n>     465  </q-n></a>    <q-m>//------------------------------------------------------------------------</q-m>
-<a name="466"><q-n>     466  </q-n></a>    
-<a name="467"><q-n>     467  </q-n></a>    <q-m>// Handle count_scl_posedge</q-m>
-<a name="468"><q-n>     468  </q-n></a>    <q-w>always</q-w> @(*) <q-w>begin</q-w>
-<a name="469"><q-n>     469  </q-n></a>        <q-w>if</q-w> (currrent_state  ==  ADDRESS  || currrent_state == READ_DATA  ||  currrent_state  ==  WRITE_DATA) <q-w>begin</q-w>
-<a name="470"><q-n>     470  </q-n></a>            <q-m>//count_scl_posedge   =   scl_positive ? (count_scl_posedge + 1) : count_scl_posedge  ;</q-m>
-<a name="471"><q-n>     471  </q-n></a>            <q-w>if</q-w> (scl_positive) <q-w>begin</q-w>
-<a name="472"><q-n>     472  </q-n></a>                count_scl_posedge   =   count_scl_posedge   +   1   ;
-<a name="473"><q-n>     473  </q-n></a>            <q-w>end</q-w>
-<a name="474"><q-n>     474  </q-n></a>            <q-w>else</q-w> <q-w>begin</q-w>
-<a name="475"><q-n>     475  </q-n></a>                count_scl_posedge   =   count_scl_posedge_temp      ;
-<a name="476"><q-n>     476  </q-n></a>            <q-w>end</q-w>
-<a name="477"><q-n>     477  </q-n></a>
-<a name="478"><q-n>     478  </q-n></a>        <q-w>end</q-w>
-<a name="479"><q-n>     479  </q-n></a>        <q-w>else</q-w> <q-w>begin</q-w>
-<a name="480"><q-n>     480  </q-n></a>            count_scl_posedge   =   0   ;
-<a name="481"><q-n>     481  </q-n></a>        <q-w>end</q-w>
-<a name="482"><q-n>     482  </q-n></a>    <q-w>end</q-w>
-<a name="483"><q-n>     483  </q-n></a>
+<a name="412"><q-n>     412  </q-n></a>                i2c_sda_en_o        =       0           ;
+<a name="413"><q-n>     413  </q-n></a>                i2c_scl_en_o        =       1           ;
+<a name="414"><q-n>     414  </q-n></a>                                
+<a name="415"><q-n>     415  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="416"><q-n>     416  </q-n></a>                start_done              =   1           ;
+<a name="417"><q-n>     417  </q-n></a>            <q-w>end</q-w>
+<a name="418"><q-n>     418  </q-n></a>
+<a name="419"><q-n>     419  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="420"><q-n>     420  </q-n></a>            WRITE_ACK       :   <q-w>begin</q-w>
+<a name="421"><q-n>     421  </q-n></a>                clk_en_o            =       1           ;
+<a name="422"><q-n>     422  </q-n></a>                sda_low_en_o        =       1           ;
+<a name="423"><q-n>     423  </q-n></a>                write_data_en_o     =       0           ;
+<a name="424"><q-n>     424  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="425"><q-n>     425  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="426"><q-n>     426  </q-n></a>                <q-w>if</q-w> (full_i)
+<a name="427"><q-n>     427  </q-n></a>                    i2c_sda_en_o    =       0           ;   <q-m>//  if RX_FIFO full send NACK to slave</q-m>
+<a name="428"><q-n>     428  </q-n></a>                <q-w>else</q-w>
+<a name="429"><q-n>     429  </q-n></a>                    i2c_sda_en_o    =       1           ;
+<a name="430"><q-n>     430  </q-n></a>                i2c_scl_en_o        =       1           ;
+<a name="431"><q-n>     431  </q-n></a>                                
+<a name="432"><q-n>     432  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="433"><q-n>     433  </q-n></a>                start_done              =   1           ;
+<a name="434"><q-n>     434  </q-n></a>            <q-w>end</q-w>
+<a name="435"><q-n>     435  </q-n></a>
+<a name="436"><q-n>     436  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="437"><q-n>     437  </q-n></a>            REPEAT_START    :   <q-w>begin</q-w>
+<a name="438"><q-n>     438  </q-n></a>                clk_en_o            =       1           ;
+<a name="439"><q-n>     439  </q-n></a>				sda_low_en_o    	=       0           ;
+<a name="440"><q-n>     440  </q-n></a>                write_data_en_o     =       0           ;
+<a name="441"><q-n>     441  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="442"><q-n>     442  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="443"><q-n>     443  </q-n></a>                i2c_sda_en_o        =       0           ; <q-m>// off i2c_sda_en to pull sda upto 1</q-m>
+<a name="444"><q-n>     444  </q-n></a>                i2c_scl_en_o        =       1           ;
+<a name="445"><q-n>     445  </q-n></a>                
+<a name="446"><q-n>     446  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="447"><q-n>     447  </q-n></a>                start_done              =   1           ;
+<a name="448"><q-n>     448  </q-n></a>            <q-w>end</q-w>
+<a name="449"><q-n>     449  </q-n></a>
+<a name="450"><q-n>     450  </q-n></a>            <q-m>//-------------------------------------------------------</q-m>
+<a name="451"><q-n>     451  </q-n></a>            STOP            :   <q-w>begin</q-w>
+<a name="452"><q-n>     452  </q-n></a>                clk_en_o            =       1           ;
+<a name="453"><q-n>     453  </q-n></a>                <q-w>if</q-w> (i2c_sda_i == 1) <q-w>begin</q-w>                   <q-m>//  If sda is high, we will set sda to low</q-m>
+<a name="454"><q-n>     454  </q-n></a>                    sda_low_en_o    =       1           ;
+<a name="455"><q-n>     455  </q-n></a>                <q-w>end</q-w>
+<a name="456"><q-n>     456  </q-n></a>                <q-w>else</q-w> <q-w>begin</q-w>
+<a name="457"><q-n>     457  </q-n></a>                    sda_low_en_o    =       0           ;
+<a name="458"><q-n>     458  </q-n></a>                <q-w>end</q-w>
+<a name="459"><q-n>     459  </q-n></a>                
+<a name="460"><q-n>     460  </q-n></a>                write_data_en_o     =       0           ;
+<a name="461"><q-n>     461  </q-n></a>                write_addr_en_o     =       0           ;
+<a name="462"><q-n>     462  </q-n></a>                receive_data_en_o   =       0           ;
+<a name="463"><q-n>     463  </q-n></a>                i2c_sda_en_o        =       1           ;
+<a name="464"><q-n>     464  </q-n></a>                i2c_scl_en_o        =       1           ;
+<a name="465"><q-n>     465  </q-n></a>                                
+<a name="466"><q-n>     466  </q-n></a>                <q-m>//  Internal signal</q-m>
+<a name="467"><q-n>     467  </q-n></a>                start_done              =   1           ;
+<a name="468"><q-n>     468  </q-n></a>            <q-w>end</q-w>
+<a name="469"><q-n>     469  </q-n></a>        <q-w>endcase</q-w>
+<a name="470"><q-n>     470  </q-n></a>
+<a name="471"><q-n>     471  </q-n></a>    <q-w>end</q-w>
+<a name="472"><q-n>     472  </q-n></a>
+<a name="473"><q-n>     473  </q-n></a>    <q-m>//--------------------------------------------------------------------</q-m>
+<a name="474"><q-n>     474  </q-n></a>    <q-m>// Detect positive scl</q-m>
+<a name="475"><q-n>     475  </q-n></a>
+<a name="476"><q-n>     476  </q-n></a>    <q-w>always</q-w> @(<q-a>posedge</q-w>    i2c_core_clk_i, <q-a>negedge</q-w>     reset_ni) <q-w>begin</q-w>
+<a name="477"><q-n>     477  </q-n></a>        <q-w>if</q-w> (~reset_ni) <q-w>begin</q-w>
+<a name="478"><q-n>     478  </q-n></a>            scl_later   &lt;=  1              ;
+<a name="479"><q-n>     479  </q-n></a>        <q-w>end</q-w>
+<a name="480"><q-n>     480  </q-n></a>        <q-w>else</q-w> <q-w>begin</q-w>
+<a name="481"><q-n>     481  </q-n></a>            scl_later   &lt;=  i2c_scl_i       ;
+<a name="482"><q-n>     482  </q-n></a>        <q-w>end</q-w>
+<a name="483"><q-n>     483  </q-n></a>    <q-w>end</q-w>
 <a name="484"><q-n>     484  </q-n></a>
-<a name="485"><q-n>     485  </q-n></a>    <q-m>// Handle read/write-enbale signal to FIFO and count posedge of clock core</q-m>
-<a name="486"><q-n>     486  </q-n></a>    <q-w>always</q-w> @ (<q-a>posedge</q-w> i2c_core_clk_i	, <q-a>negedge</q-w> reset_ni) <q-w>begin</q-w>
-<a name="487"><q-n>     487  </q-n></a>        <q-w>if</q-w> (~reset_ni) <q-w>begin</q-w>
-<a name="488"><q-n>     488  </q-n></a>            r_fifo_en               &lt;=  0              	;
-<a name="489"><q-n>     489  </q-n></a>			w_fifo_en	            &lt;=	0				;
-<a name="490"><q-n>     490  </q-n></a>            count_scl_posedge_temp  &lt;=  0               ;
-<a name="491"><q-n>     491  </q-n></a>            count_bit               &lt;=  0               ;
-<a name="492"><q-n>     492  </q-n></a>            read_ack_to_read_done	&lt;=	0               ;
-<a name="493"><q-n>     493  </q-n></a>            read_ack_to_write_done	&lt;=	0               ;
-<a name="494"><q-n>     494  </q-n></a>            
-<a name="495"><q-n>     495  </q-n></a>        <q-w>end</q-w>
-<a name="496"><q-n>     496  </q-n></a>        <q-w>else</q-w> <q-w>begin</q-w>
-<a name="497"><q-n>     497  </q-n></a>            count_scl_posedge_temp  &lt;=  count_scl_posedge   ;
-<a name="498"><q-n>     498  </q-n></a>			<q-m>// enable read/ write data from/to FIFO when READ_LATER_ACK state and WRITE_ACK state</q-m>
-<a name="499"><q-n>     499  </q-n></a>			<q-m>// at frist READ_ACK state , data is always valid, do not enable read.</q-m>
-<a name="500"><q-n>     500  </q-n></a>            <q-w>if</q-w> ((currrent_state == READ_LATER_ACK) &amp;&amp; (scl_positive == 1)) <q-w>begin</q-w>
-<a name="501"><q-n>     501  </q-n></a>				r_fifo_en   &lt;=  1           ;
-<a name="502"><q-n>     502  </q-n></a>			<q-w>end</q-w>
-<a name="503"><q-n>     503  </q-n></a>			<q-w>else</q-w> <q-w>begin</q-w>
-<a name="504"><q-n>     504  </q-n></a>				r_fifo_en	&lt;=	0	        ;
-<a name="505"><q-n>     505  </q-n></a>			<q-w>end</q-w>
-<a name="506"><q-n>     506  </q-n></a>
-<a name="507"><q-n>     507  </q-n></a>			<q-m>//if ((currrent_state == WRITE_ACK) &amp;&amp; (scl_positive == 1)) begin</q-m>
-<a name="508"><q-n>     508  </q-n></a>            <q-w>if</q-w> ((currrent_state == READ_DATA) &amp;&amp; (next_sate == WRITE_ACK)) <q-w>begin</q-w>   <q-m>//  enable write data to rx_fifo in only 1 clk core</q-m>
-<a name="509"><q-n>     509  </q-n></a>				w_fifo_en   &lt;=  1           ;
-<a name="510"><q-n>     510  </q-n></a>			<q-w>end</q-w>
-<a name="511"><q-n>     511  </q-n></a>			<q-w>else</q-w> <q-w>begin</q-w>
-<a name="512"><q-n>     512  </q-n></a>				w_fifo_en	&lt;=	0	        ;
-<a name="513"><q-n>     513  </q-n></a>			<q-w>end</q-w>
-<a name="514"><q-n>     514  </q-n></a>
-<a name="515"><q-n>     515  </q-n></a>            <q-m>// Handle count_bit to transfer to datapath</q-m>
-<a name="516"><q-n>     516  </q-n></a>            <q-w>if</q-w> (currrent_state  ==  ADDRESS  || currrent_state  ==  WRITE_DATA) <q-w>begin</q-w>
-<a name="517"><q-n>     517  </q-n></a>
-<a name="518"><q-n>     518  </q-n></a>            <q-m>// Each postitive of scl, if count_bit != 0 , reduce count_bit by 1</q-m>
-<a name="519"><q-n>     519  </q-n></a>                count_bit     &lt;=   (count_bit_o != 0 &amp;&amp; scl_positive) ? (count_bit - 1) : count_bit  ;
-<a name="520"><q-n>     520  </q-n></a>
-<a name="521"><q-n>     521  </q-n></a>            <q-w>end</q-w>
-<a name="522"><q-n>     522  </q-n></a>
-<a name="523"><q-n>     523  </q-n></a>            <q-w>else</q-w> <q-w>if</q-w> (currrent_state == READ_DATA) <q-w>begin</q-w>
-<a name="524"><q-n>     524  </q-n></a>
-<a name="525"><q-n>     525  </q-n></a>                <q-m>// Each negative of scl, if count_bit != 0 , reduce count_bit by 1</q-m>
-<a name="526"><q-n>     526  </q-n></a>                count_bit     &lt;=   (count_bit_o != 0 &amp;&amp; scl_negative) ? (count_bit - 1) : count_bit   ;
-<a name="527"><q-n>     527  </q-n></a>
-<a name="528"><q-n>     528  </q-n></a>            <q-w>end</q-w>
-<a name="529"><q-n>     529  </q-n></a>
-<a name="530"><q-n>     530  </q-n></a>            <q-w>else</q-w> <q-w>begin</q-w>
-<a name="531"><q-n>     531  </q-n></a>                count_bit     &lt;=   7           ;
-<a name="532"><q-n>     532  </q-n></a>            <q-w>end</q-w>
-<a name="533"><q-n>     533  </q-n></a>
-<a name="534"><q-n>     534  </q-n></a>            <q-m>// Handle internal signal : read_ack_to_read/write_done</q-m>
-<a name="535"><q-n>     535  </q-n></a>            <q-w>if</q-w> ((currrent_state == READ_ACK) || (currrent_state == READ_LATER_ACK)) <q-w>begin</q-w>
-<a name="536"><q-n>     536  </q-n></a>                <q-w>if</q-w> (scl_positive == 1 &amp;&amp; i2c_sda_i == 0 &amp;&amp; rw_i == 1 &amp;&amp; full_i == 0) <q-w>begin</q-w>    
-<a name="537"><q-n>     537  </q-n></a>
-<a name="538"><q-n>     538  </q-n></a>                    read_ack_to_read_done	&lt;=	1         ; 
-<a name="539"><q-n>     539  </q-n></a>                    read_ack_to_write_done	&lt;=	0         ;
-<a name="540"><q-n>     540  </q-n></a>
-<a name="541"><q-n>     541  </q-n></a>                <q-w>end</q-w>
-<a name="542"><q-n>     542  </q-n></a>
-<a name="543"><q-n>     543  </q-n></a>                <q-w>else</q-w> <q-w>if</q-w> (scl_positive == 1 &amp;&amp; i2c_sda_i == 0 &amp;&amp; rw_i == 0 &amp;&amp; empty_i == 0) <q-w>begin</q-w>
+<a name="485"><q-n>     485  </q-n></a>    <q-w>assign</q-w>  scl_positive = i2c_scl_i &amp; (~scl_later) 	;
+<a name="486"><q-n>     486  </q-n></a>	<q-w>assign</q-w> 	scl_negative = (~i2c_scl_i) &amp; (scl_later)	;
+<a name="487"><q-n>     487  </q-n></a>
+<a name="488"><q-n>     488  </q-n></a>    <q-m>// end detect positive scl</q-m>
+<a name="489"><q-n>     489  </q-n></a>    <q-m>//------------------------------------------------------------------------</q-m>
+<a name="490"><q-n>     490  </q-n></a>    
+<a name="491"><q-n>     491  </q-n></a>    <q-m>// Handle count_scl_posedge</q-m>
+<a name="492"><q-n>     492  </q-n></a>    <q-w>always</q-w> @(*) <q-w>begin</q-w>
+<a name="493"><q-n>     493  </q-n></a>        <q-w>if</q-w> (currrent_state  ==  ADDRESS  || currrent_state == READ_DATA  ||  currrent_state  ==  WRITE_DATA) <q-w>begin</q-w>
+<a name="494"><q-n>     494  </q-n></a>            <q-m>//count_scl_posedge   =   scl_positive ? (count_scl_posedge + 1) : count_scl_posedge  ;</q-m>
+<a name="495"><q-n>     495  </q-n></a>            <q-w>if</q-w> (scl_positive) <q-w>begin</q-w>
+<a name="496"><q-n>     496  </q-n></a>                count_scl_posedge   =   count_scl_posedge   +   1   ;
+<a name="497"><q-n>     497  </q-n></a>            <q-w>end</q-w>
+<a name="498"><q-n>     498  </q-n></a>            <q-w>else</q-w> <q-w>begin</q-w>
+<a name="499"><q-n>     499  </q-n></a>                count_scl_posedge   =   count_scl_posedge_temp      ;
+<a name="500"><q-n>     500  </q-n></a>            <q-w>end</q-w>
+<a name="501"><q-n>     501  </q-n></a>
+<a name="502"><q-n>     502  </q-n></a>        <q-w>end</q-w>
+<a name="503"><q-n>     503  </q-n></a>        <q-w>else</q-w> <q-w>begin</q-w>
+<a name="504"><q-n>     504  </q-n></a>            count_scl_posedge   =   0   ;
+<a name="505"><q-n>     505  </q-n></a>        <q-w>end</q-w>
+<a name="506"><q-n>     506  </q-n></a>    <q-w>end</q-w>
+<a name="507"><q-n>     507  </q-n></a>
+<a name="508"><q-n>     508  </q-n></a>
+<a name="509"><q-n>     509  </q-n></a>    <q-m>// Handle read/write-enbale signal to FIFO and count posedge of clock core</q-m>
+<a name="510"><q-n>     510  </q-n></a>    <q-w>always</q-w> @ (<q-a>posedge</q-w> i2c_core_clk_i	, <q-a>negedge</q-w> reset_ni) <q-w>begin</q-w>
+<a name="511"><q-n>     511  </q-n></a>        <q-w>if</q-w> (~reset_ni) <q-w>begin</q-w>
+<a name="512"><q-n>     512  </q-n></a>            r_fifo_en               &lt;=  0              	;
+<a name="513"><q-n>     513  </q-n></a>			w_fifo_en	            &lt;=	0				;
+<a name="514"><q-n>     514  </q-n></a>            count_scl_posedge_temp  &lt;=  0               ;
+<a name="515"><q-n>     515  </q-n></a>            count_bit               &lt;=  0               ;
+<a name="516"><q-n>     516  </q-n></a>            read_ack_to_read_done	&lt;=	0               ;
+<a name="517"><q-n>     517  </q-n></a>            read_ack_to_write_done	&lt;=	0               ;
+<a name="518"><q-n>     518  </q-n></a>            
+<a name="519"><q-n>     519  </q-n></a>        <q-w>end</q-w>
+<a name="520"><q-n>     520  </q-n></a>        <q-w>else</q-w> <q-w>begin</q-w>
+<a name="521"><q-n>     521  </q-n></a>            count_scl_posedge_temp  &lt;=  count_scl_posedge   ;
+<a name="522"><q-n>     522  </q-n></a>			<q-m>// enable read/ write data from/to FIFO when READ_LATER_ACK state and WRITE_ACK state</q-m>
+<a name="523"><q-n>     523  </q-n></a>			<q-m>// at frist READ_ACK state , data is always valid, do not enable read.</q-m>
+<a name="524"><q-n>     524  </q-n></a>            <q-w>if</q-w> ((currrent_state == READ_LATER_ACK) &amp;&amp; (scl_positive == 1)) <q-w>begin</q-w>
+<a name="525"><q-n>     525  </q-n></a>				r_fifo_en   &lt;=  1           ;
+<a name="526"><q-n>     526  </q-n></a>			<q-w>end</q-w>
+<a name="527"><q-n>     527  </q-n></a>			<q-w>else</q-w> <q-w>begin</q-w>
+<a name="528"><q-n>     528  </q-n></a>				r_fifo_en	&lt;=	0	        ;
+<a name="529"><q-n>     529  </q-n></a>			<q-w>end</q-w>
+<a name="530"><q-n>     530  </q-n></a>
+<a name="531"><q-n>     531  </q-n></a>			<q-m>//if ((currrent_state == WRITE_ACK) &amp;&amp; (scl_positive == 1)) begin</q-m>
+<a name="532"><q-n>     532  </q-n></a>            <q-w>if</q-w> ((currrent_state == READ_DATA) &amp;&amp; (next_sate == WRITE_ACK)) <q-w>begin</q-w>   <q-m>//  enable write data to rx_fifo in only 1 clk core</q-m>
+<a name="533"><q-n>     533  </q-n></a>				w_fifo_en   &lt;=  1           ;
+<a name="534"><q-n>     534  </q-n></a>			<q-w>end</q-w>
+<a name="535"><q-n>     535  </q-n></a>			<q-w>else</q-w> <q-w>begin</q-w>
+<a name="536"><q-n>     536  </q-n></a>				w_fifo_en	&lt;=	0	        ;
+<a name="537"><q-n>     537  </q-n></a>			<q-w>end</q-w>
+<a name="538"><q-n>     538  </q-n></a>
+<a name="539"><q-n>     539  </q-n></a>            <q-m>// Handle count_bit to transfer to datapath</q-m>
+<a name="540"><q-n>     540  </q-n></a>            <q-w>if</q-w> (currrent_state  ==  ADDRESS  || currrent_state  ==  WRITE_DATA) <q-w>begin</q-w>
+<a name="541"><q-n>     541  </q-n></a>
+<a name="542"><q-n>     542  </q-n></a>            <q-m>// Each postitive of scl, if count_bit != 0 , reduce count_bit by 1</q-m>
+<a name="543"><q-n>     543  </q-n></a>                count_bit     &lt;=   (count_bit_o != 0 &amp;&amp; scl_positive) ? (count_bit - 1) : count_bit  ;
 <a name="544"><q-n>     544  </q-n></a>
-<a name="545"><q-n>     545  </q-n></a>                    read_ack_to_read_done	&lt;=	0        ;
-<a name="546"><q-n>     546  </q-n></a>                    read_ack_to_write_done	&lt;=	1        ;
-<a name="547"><q-n>     547  </q-n></a>
-<a name="548"><q-n>     548  </q-n></a>                <q-w>end</q-w>
-<a name="549"><q-n>     549  </q-n></a>            <q-w>end</q-w>
-<a name="550"><q-n>     550  </q-n></a>            <q-w>else</q-w> <q-w>begin</q-w>
-<a name="551"><q-n>     551  </q-n></a>                read_ack_to_read_done	&lt;=	0        ;
-<a name="552"><q-n>     552  </q-n></a>                read_ack_to_write_done	&lt;=	0        ;
-<a name="553"><q-n>     553  </q-n></a>            <q-w>end</q-w>
-<a name="554"><q-n>     554  </q-n></a>
-<a name="555"><q-n>     555  </q-n></a>        <q-w>end</q-w>
-<a name="556"><q-n>     556  </q-n></a>
-<a name="557"><q-n>     557  </q-n></a>    <q-w>end</q-w>
-<a name="558"><q-n>     558  </q-n></a>
-<a name="559"><q-n>     559  </q-n></a><q-w>endmodule</q-w></pre>
+<a name="545"><q-n>     545  </q-n></a>            <q-w>end</q-w>
+<a name="546"><q-n>     546  </q-n></a>
+<a name="547"><q-n>     547  </q-n></a>            <q-w>else</q-w> <q-w>if</q-w> (currrent_state == READ_DATA) <q-w>begin</q-w>
+<a name="548"><q-n>     548  </q-n></a>
+<a name="549"><q-n>     549  </q-n></a>                <q-m>// Each negative of scl, if count_bit != 0 , reduce count_bit by 1</q-m>
+<a name="550"><q-n>     550  </q-n></a>                count_bit     &lt;=   (count_bit_o != 0 &amp;&amp; scl_negative) ? (count_bit - 1) : count_bit   ;
+<a name="551"><q-n>     551  </q-n></a>
+<a name="552"><q-n>     552  </q-n></a>            <q-w>end</q-w>
+<a name="553"><q-n>     553  </q-n></a>
+<a name="554"><q-n>     554  </q-n></a>            <q-w>else</q-w> <q-w>begin</q-w>
+<a name="555"><q-n>     555  </q-n></a>                count_bit     &lt;=   7           ;
+<a name="556"><q-n>     556  </q-n></a>            <q-w>end</q-w>
+<a name="557"><q-n>     557  </q-n></a>
+<a name="558"><q-n>     558  </q-n></a>            <q-m>// Handle internal signal : read_ack_to_read/write_done</q-m>
+<a name="559"><q-n>     559  </q-n></a>            <q-w>if</q-w> ((currrent_state == READ_ACK) || (currrent_state == READ_LATER_ACK)) <q-w>begin</q-w>
+<a name="560"><q-n>     560  </q-n></a>                <q-w>if</q-w> (scl_positive == 1 &amp;&amp; i2c_sda_i == 0 &amp;&amp; rw_i == 1 &amp;&amp; full_i == 0) <q-w>begin</q-w>    
+<a name="561"><q-n>     561  </q-n></a>
+<a name="562"><q-n>     562  </q-n></a>                    read_ack_to_read_done	&lt;=	1         ; 
+<a name="563"><q-n>     563  </q-n></a>                    read_ack_to_write_done	&lt;=	0         ;
+<a name="564"><q-n>     564  </q-n></a>
+<a name="565"><q-n>     565  </q-n></a>                <q-w>end</q-w>
+<a name="566"><q-n>     566  </q-n></a>
+<a name="567"><q-n>     567  </q-n></a>                <q-w>else</q-w> <q-w>if</q-w> (scl_positive == 1 &amp;&amp; i2c_sda_i == 0 &amp;&amp; rw_i == 0 &amp;&amp; empty_i == 0) <q-w>begin</q-w>
+<a name="568"><q-n>     568  </q-n></a>
+<a name="569"><q-n>     569  </q-n></a>                    read_ack_to_read_done	&lt;=	0        ;
+<a name="570"><q-n>     570  </q-n></a>                    read_ack_to_write_done	&lt;=	1        ;
+<a name="571"><q-n>     571  </q-n></a>
+<a name="572"><q-n>     572  </q-n></a>                <q-w>end</q-w>
+<a name="573"><q-n>     573  </q-n></a>            <q-w>end</q-w>
+<a name="574"><q-n>     574  </q-n></a>            <q-w>else</q-w> <q-w>begin</q-w>
+<a name="575"><q-n>     575  </q-n></a>                read_ack_to_read_done	&lt;=	0        ;
+<a name="576"><q-n>     576  </q-n></a>                read_ack_to_write_done	&lt;=	0        ;
+<a name="577"><q-n>     577  </q-n></a>            <q-w>end</q-w>
+<a name="578"><q-n>     578  </q-n></a>
+<a name="579"><q-n>     579  </q-n></a>        <q-w>end</q-w>
+<a name="580"><q-n>     580  </q-n></a>
+<a name="581"><q-n>     581  </q-n></a>    <q-w>end</q-w>
+<a name="582"><q-n>     582  </q-n></a>
+<a name="583"><q-n>     583  </q-n></a><q-w>endmodule</q-w></pre>
 </tt>
 
   

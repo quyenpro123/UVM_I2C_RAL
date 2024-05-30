@@ -38,19 +38,13 @@ class TEST_1 extends reg_base_sequence;
   task body();
     uvm_reg_data_t data, mirror_reg_value;
     uvm_status_e status;
-    `uvm_info(get_name(), "-------------TEST 1: reset, read/write reg------------", UVM_MEDIUM)
-    // //read default value
+    `uvm_info(get_name(), "-------------TEST 1: reset, read/write reg------------", UVM_MEDIUM)    
     
-    
-    
-    
-
     //write new value
     this.reg_model.reg_tran.write(status, 8'h11);
     this.reg_model.reg_addr.write(status, 8'h22);
     this.reg_model.reg_cmd.write(status, 8'h30);
     this.reg_model.reg_pres.write(status, 8'h99);
-    
 
     this.reg_model.reg_tran.read(status, data);
     this.reg_model.reg_st.read(status, data);
@@ -64,8 +58,7 @@ endclass
 
 class TEST_2 extends reg_base_sequence;
   `uvm_object_utils(TEST_2)
-  
-  
+
   function new(string name= "TEST_2");
     super.new(name);
   endfunction
@@ -182,6 +175,14 @@ class TEST_3 extends reg_base_sequence;
     this.reg_model.reg_cmd.write(status, 8'he0);
     #8800;
     this.reset();
+
+     this.reg_model.reg_pres.write(status, 8'h08); // 8 -> 0: repeat start only occurs when transfifo is not empty
+    this.reg_model.reg_addr.write(status, 8'h20); // Need to change i2c_slave_model.sv at line 293 (less than number of bytes that master transmits)
+    this.reg_model.reg_tran.write(status, 8'h00);
+    repeat(10)
+      this.reg_model.reg_tran.write(status, $urandom_range(1, 255));
+    this.reg_model.reg_cmd.write(status, 8'hc0);
+    #8800;
 
     #1000000;
   endtask: body
@@ -348,7 +349,6 @@ class TEST_8 extends reg_base_sequence;
     repeat(16) begin
       this.reg_model.reg_rev.read(status, data);
     end
-    
 
     this.reg_model.reg_pres.write(status, 8'h08);
     this.reg_model.reg_tran.write(status, 0);
@@ -364,7 +364,6 @@ class TEST_8 extends reg_base_sequence;
     repeat(16) begin
       this.reg_model.reg_rev.read(status, data);
     end
-
 
     this.reg_model.reg_pres.write(status, 8'h08);
     this.reg_model.reg_tran.write(status, 0);
@@ -401,8 +400,6 @@ endclass
 
 class TEST_9 extends reg_base_sequence;
   `uvm_object_utils(TEST_9)
-  
-  
   
   function new(string name= "TEST_9");
     super.new(name);
@@ -446,7 +443,7 @@ class TEST_10 extends reg_base_sequence;
     `uvm_info(get_name(), "-------------TEST 10: apb read from rx fifo until empty------------", UVM_MEDIUM)
     this.reg_model.reg_pres.write(status, 8'h08);
     this.reg_model.reg_tran.write(status, 0);
-    repeat(20) begin
+    repeat(15) begin
       this.reg_model.reg_tran.write(status, $urandom_range(1, 255));
     end
     this.reg_model.reg_addr.write(status, 8'h20);
@@ -465,8 +462,6 @@ endclass
 
 class TEST_11 extends reg_base_sequence;
   `uvm_object_utils(TEST_11)
-  
-  
   
   function new(string name= "TEST_11");
     super.new(name);

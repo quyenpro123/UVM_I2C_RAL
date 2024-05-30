@@ -16,6 +16,6 @@
 # .\final_coverage.ucdb opened as coverage dataset "final_coverage"
 coverage exclude -src ../rtl/apb_slave_interface.v -allfalse -line 87 -code b
 coverage exclude -src ../rtl/apb_slave_interface.v -allfalse -line 60 -code b
-coverage exclude -src ../rtl/i2c_master_fsm.v -allfalse -line 276 -code b
+coverage exclude -src ../rtl/i2c_master_fsm.v -allfalse -line 300 -code b
 coverage report -html -htmldir covhtmlreport -source -details=abcdefgs -assert -directive -cvg -code bcefs -threshL 50 -threshH 90
 # Report created in covhtmlreport/index.html

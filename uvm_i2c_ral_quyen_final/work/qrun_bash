@@ -30,6 +30,7 @@ do
     vsim -voptargs=+acc -sva -assertdebug -coverage top -c -do "set WildcardFilter None;add wave -r top/*; coverage save -onexit $seq_ins.ucdb; run -all; quit;"
 done
 vcover merge final_coverage.ucdb *.ucdb;
+rm -rf work;
 #vsim -viewcov final_coverage.ucdb;
 #cd covhtmlreport;
 #firefox index.html;

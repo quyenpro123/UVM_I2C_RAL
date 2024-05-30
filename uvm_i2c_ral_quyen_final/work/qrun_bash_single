@@ -1,6 +1,6 @@
-seq=TEST_1
+#seq=TEST_1
 # seq=TEST_2
-#seq=TEST_3
+seq=TEST_3
 # seq=TEST_4
 # seq=TEST_5
 #seq=TEST_6
